@@ -19,6 +19,10 @@ const { title, description, classList, pageTitle, ogImage } = Astro.props;
   <BaseHead ogImage={ogImage} title={title} description={description} />
 
   <body class:list={[classList]}>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5DFDJZF8"
+      height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
     <BaseNavigation {pageTitle} />
     <slot />
     <BaseFooter />
