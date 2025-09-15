@@ -26,6 +26,9 @@
 html {
   scroll-behavior: smooth;
 }
+html strong {
+  color: #000000;
+}
 
 ::-webkit-scrollbar {
   width: 22px;
