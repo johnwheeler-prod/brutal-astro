@@ -11,6 +11,8 @@ description: Discover why traditional SEO fails with AI search engines like Chat
 layout: '../../layouts/BlogPost.astro'
 ---
 
+# Answer engine obscurity - How a simple UI is holding back the future of AEO
+
 ## The traditional SEO disconnect
 
 Traditional SEO isn't dead, but adhering to it naively ignores AI-powered search engines that process queries through semantic understanding rather than keyword matching. [While Google maintains nearly 90% of global search traffic](https://learn.g2.com/top-10-search-engines), AI Overviews are now default and powered by Gemini, changing how content gets discovered.
@@ -84,7 +86,7 @@ Traditional SEO prioritizes backlink profiles, which still matter for Retrieval 
 
 ### The Metrics Mismatch
 
-Click-through rates have anchored SEO measurement for decades, but they're irrelevant for Answer Engine Optimization. AEO success happens before clicks—through answer inclusion, brand mentions, and synthesis value that builds awareness without requiring traffic. The measurement gap is real: as of September 2025, Google Search Console still offers no way to distinguish impressions from AI Overviews, AI mode, or traditional search results.
+Click-through rates have anchored SEO measurement for decades, but they're irrelevant for Answer Engine Optimization. AEO success happens before clicks, through answer inclusion, brand mentions, and synthesis value that builds awareness without requiring traffic. The measurement gap is real: as of September 2025, Google Search Console still offers no way to distinguish impressions from AI Overviews, AI mode, or traditional search results.
 
 **The opportunity:** These gaps represent competitive advantages for content teams willing to think beyond traditional SEO metrics and embrace semantic optimization strategies.
 
@@ -131,7 +133,7 @@ Focus on semantic similarity rather than individual keywords, optimize content f
 
 ## Three things SEO and content teams can do right now
 
-The Great Decoupling can seem scary. Seeing impressions and click through diverge so quickly, but a longer analysis can give some hope. Clicks aren't just going down, impressions are going way up.
+The Great Decoupling, seeing impressions and click throughs diverge so quickly, can seem scary, but there is some hope in the divergence, clicks aren't just going down, impressions are going way up.
 
 ![Image of The Great Decoupling, from ahrefs](../../assets/answer_engine_obscurity/the_great_decoupling.jpg)
 
