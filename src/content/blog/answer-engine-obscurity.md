@@ -13,6 +13,8 @@ layout: '../../layouts/BlogPost.astro'
 
 # Answer engine obscurity - How a simple UI is holding back the future of AEO
 
+Updated on September 16, 2025 to [address emerging information regarding the great decoupling](#three-things-seo-and-content-teams-can-do-right-now)
+
 ## The traditional SEO disconnect
 
 Traditional SEO isn't dead, but adhering to it naively ignores AI-powered search engines that process queries through semantic understanding rather than keyword matching. [While Google maintains nearly 90% of global search traffic](https://learn.g2.com/top-10-search-engines), AI Overviews are now default and powered by Gemini, changing how content gets discovered.
@@ -135,7 +137,12 @@ Focus on semantic similarity rather than individual keywords, optimize content f
 
 The Great Decoupling, seeing impressions and click throughs diverge so quickly, can seem scary, but there is some hope in the divergence, clicks aren't just going down, impressions are going way up.
 
+**Edit:** Over the weekend, google began testing the disabling of &num=100 as a search parameter, a tactic used by a variety of keyword ranking tools that scrape web results for keywords using that parameter. While this is an emerging topic, it does seem like keyword scrapers may own some or most of the responsibility for the massive increase in impressions.
+
+For a more detailed walkthrough about this topic, [check out this article from Brodie Clark Consulting](https://brodieclark.com/the-great-decoupling-num100/), or search &num=100 on LinkedIn.
+
 ![Image of The Great Decoupling, from ahrefs](../../assets/answer_engine_obscurity/the_great_decoupling.jpg)
+_**The image above may be misleading about the legitimacy of the great decoupling**_
 
 1.  **Content strategy:** qualitatively build query fan outs **every time** you develop new content. Tune different passages (sections of your content) to the different query variations. Always pick an ICP for a piece of content, and speak directly to them.
     
