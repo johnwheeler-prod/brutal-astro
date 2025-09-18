@@ -7,13 +7,42 @@ import RecentBlogPosts from '@components/generic/RecentBlogPosts.astro';
 const ogImage = new URL(`/v1/generate/og/${Astro.params.slug}.png`, Astro.url);
 
 const { content, headings } = Astro.props;
-const { title, description } = content;
+const { title, description, pubDate, updatedDate, image, author = "John Wheeler" } = content;
+
+const siteUrl = 'https://www.johnwheelerproduction.com';
+const url = `${siteUrl}${Astro.url.pathname}`;
+
+const pageSchema = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": title,
+  "url": url,
+  "datePublished": pubDate,
+  "dateModified": updatedDate || pubDate,
+  "author": {
+    "@type": "Person",
+    "name": author,
+    "url": siteUrl
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "John Wheeler Production",
+    "logo": {
+      "@type": "ImageObject",
+      "url": `${siteUrl}/images/logo.png`
+    }
+  },
+  "image": `${siteUrl}${image || ogImage}`,
+  "description": description,
+  "mainEntityOfPage": url
+};
 ---
 
 <Layout
   title={title as string}
   description={description as string}
   ogImage={ogImage}
+  pageSchema={pageSchema}
 >
   <main class='p-6 lg:grid lg:grid-cols-3 flex justify-center'>
     <BlogSideBar headings={headings} />
