@@ -6,6 +6,7 @@ interface Props {
   title: string;
   description: string;
   ogImage?: URL;
+  pageSchema?: Record<string, any>;
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -14,7 +15,27 @@ if (Astro.props.ogImage === undefined) {
   Astro.props.ogImage = new URL('/v1/generate/og/default.png', Astro.url);
 }
 
-const { title, description, ogImage } = Astro.props;
+const { title, description, ogImage, pageSchema } = Astro.props;
+
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "John Wheeler",
+  "url": "https://www.johnwheelerproduction.com/",
+  "jobTitle": "Software and Web Engineer",
+  "sameAs": [
+    "https://www.linkedin.com/in/john-wheeler",
+    "https://github.com/johnwheeler"
+  ]
+};
+
+const webSiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "url": "https://www.johnwheelerproduction.com/",
+  "name": "John Wheeler Production",
+  "description": "Portfolio of John Wheeler"
+};
 ---
 
 <head>
@@ -56,6 +77,16 @@ const { title, description, ogImage } = Astro.props;
   <link rel='icon' type='image/svg' href='/favicon.svg' />
 
   <title>John Wheeler | {title}</title>
+
+  <script type="application/ld+json">
+    {JSON.stringify([personSchema, webSiteSchema])}
+  </script>
+
+  {pageSchema && (
+    <script type="application/ld+json">
+      {JSON.stringify(pageSchema)}
+    </script>
+  )}
 
   <ViewTransitions />
 
