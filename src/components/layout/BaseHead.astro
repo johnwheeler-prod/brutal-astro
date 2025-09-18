@@ -78,15 +78,13 @@ const webSiteSchema = {
 
   <title>John Wheeler | {title}</title>
 
-  <script type="application/ld+json">
-    {JSON.stringify([personSchema, webSiteSchema])}
-  </script>
+<!-- Global Schema -->
+<script type="application/ld+json" set:html={JSON.stringify([personSchema, webSiteSchema])}></script>
 
-  {pageSchema && (
-    <script type="application/ld+json">
-      {JSON.stringify(pageSchema)}
-    </script>
-  )}
+<!-- Page Schema -->
+{pageSchema && (
+  <script type="application/ld+json" set:html={JSON.stringify(pageSchema)}></script>
+)}
 
   <ViewTransitions />
 
