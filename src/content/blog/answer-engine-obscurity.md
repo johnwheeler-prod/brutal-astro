@@ -1,5 +1,5 @@
 ---
-title: SEO action items for small business owners
+title: Answer engine obscurity - How a simple UI is holding back the future of AEO
 pubDate: "September 15, 2025"
 author: John Wheeler
 tags:
