@@ -17,7 +17,7 @@ layout: '../../layouts/BlogPost.astro'
 
 *   In June of 2025, [ahrefs published an article coining the term “the great decoupling”](https://ahrefs.com/blog/the-great-decoupling/), which was intended to illustrate an industry shift toward zero click search, with the notable upside of massively increased impressions
     
-*   On September 12, 2025, Google began testing, and ultimately pushed out an update removing the functionality of the &num=100 parameter, which many traditional SEO tools used to track keyword ranks
+*   On September 12, 2025, Google began testing, and ultimately pushed out an update removing the functionality of the &num=100 parameter, which many traditional SEO tools used to track keyword ranks. In an instant, "the great decoupling" seemed to fall apart. Instead of increased impressions, it looks like impressions and clicks are both falling, and fast.
     
 *   Over the weekend and into the following week, a number of SEO tools scrambled to patch their keyword ranking tools (increasing their query costs 10 fold)
     
