@@ -16,8 +16,5 @@ export default defineConfig({
     optimizeDeps: {
       exclude: ['@resvg/resvg-js'],
     },
-    redirect: {
-      '/answer-engine-obscurity':'/1-answer-engine-obscurity',
-    },
   },
 });
