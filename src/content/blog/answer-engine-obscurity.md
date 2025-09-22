@@ -1,6 +1,6 @@
 ---
 title: Answer engine obscurity - How a simple UI is holding back the future of AEO
-pubDate: "2025-09-15T14:32:00-04:00"
+pubDate: "September 15, 2025"
 author: John Wheeler
 tags:
   - AEO
