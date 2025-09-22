@@ -19,7 +19,7 @@ layout: '../../layouts/BlogPost.astro'
     
 *   On September 12, 2025, Google began testing, and ultimately pushed out an update removing the functionality of the &num=100 parameter, which many traditional SEO tools used to track keyword ranks. In an instant, "the great decoupling" seemed to fall apart. Instead of increased impressions, it looks like impressions and clicks are both falling, and fast.
     
-*   Over the weekend and into the following week, a number of SEO tools scrambled to patch their keyword ranking tools (increasing their query costs 10 fold)
+*   Over the weekend and into the following week, a number of SEO tools scrambled to patch their keyword ranking functionality (increasing their query costs 10 fold)
     
 
 ## The fallout from &num=100
@@ -28,7 +28,7 @@ layout: '../../layouts/BlogPost.astro'
     
 *   This change of course disrupted a variety of automated tools that companies use to monitor their own search rankings. Semrush, ahrefs, moz, and other large scale SEO players were all affected.
     
-*   The proven consequences are related to traditional search tools, but the timing is suspect. As companies are vying for AI visibility, the timing of this notable change would hint that Google knows more than we do. Maybe the fight for default AI tool is heating up. Gemini as the incumbent in this AI iteration of search has the most to lose since [Google still owns nearly 90% of global search](https://gs.statcounter.com/search-engine-market-share/all/united-states-of-america) according to global stats.
+*   The proven consequences are related to traditional search tools, but the _when_ is suspect. As companies are vying for AI visibility, the timing of this notable change would hint that Google knows more than we do (like they usually do). Maybe the fight for default AI tool is heating up. Gemini as the incumbent in this AI iteration of search has the most to lose since [Google still owns nearly 90% of global search](https://gs.statcounter.com/search-engine-market-share/all/united-states-of-america) according to global stats.
     
 
 ## Google and OpenAI post lucrative jobs
@@ -46,4 +46,4 @@ layout: '../../layouts/BlogPost.astro'
     
 *   Expect more moves around SEO, AEO, scraping restrictions, and AI-driven traffic strategies.
     
-*   The real question isn’t just who wins visibility, but who defines the future of how information is discovered. Google knows t[he delphic costs of search are too high](https://arxiv.org/pdf/2308.07525), and OpenAI knows they can’t move the needle without traditional SEO strategies.
+*   The real question isn’t just who wins visibility, but who defines the future of how information is discovered. Google knows [the delphic costs of search are too high](https://arxiv.org/pdf/2308.07525), and OpenAI knows they can’t move the needle without traditional SEO strategies.
