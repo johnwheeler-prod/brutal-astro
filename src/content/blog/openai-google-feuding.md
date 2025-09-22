@@ -6,7 +6,7 @@ tags:
   - SEO
   - AEO
   - Web Development
-imgUrl: '../../assets/seo_for_small_business/GA4_image.jpg'
+imgUrl: '../../assets/openai_google_feuding/google_vs_openai.jpg'
 description: Google’s removal of the &num=100 search parameter has shaken SEO tools, fueling speculation of a brewing rivalry with OpenAI. With Google hiring an Anti-Scraper Analyst and OpenAI posting a Growth role in SEO, the fight for AI search dominance is heating up.
 layout: '../../layouts/BlogPost.astro'
 ---
