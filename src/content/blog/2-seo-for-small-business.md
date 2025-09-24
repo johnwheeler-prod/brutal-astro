@@ -1,5 +1,5 @@
 ---
-title: SEO action items for small business owners
+title: SEO to-dos for small business owners
 pubDate: "September 21, 2025"
 author: John Wheeler
 tags:
@@ -11,7 +11,7 @@ description: Small business owners wear too many hats to master SEO from scratch
 layout: '../../layouts/BlogPost.astro'
 ---
 
-# SEO action items for small business owners
+# SEO to-dos for small business owners
 
 ## SEO foundations: things you would know if you didn’t already have 9 jobs
 
