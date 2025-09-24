@@ -36,6 +36,14 @@ Remember, not everything below needs to be done immediately. Anything you add on
 *   **Meta basics**: Every page should have a unique, descriptive title and meta description. Think “headline + short pitch.” Titles can be as simple as the heading of the page, like “Pricing” or “About”.
     
 *   **Speed + mobile**: Most of your visitors are on their phone. Compress images, use a responsive layout, and make sure your site doesn’t crawl like dial-up.
+
+**To-do**:
+
+*   Jot down some keywords you want to associate with your business, slightly longer ones are less competitive, think 3-5 words in a short phrase "bespoke wedding photographer", "traditional leather craft and finishing", "mid century kitchen contractor"
+
+*   Check the SEO tab on your website editor. It likely has suggestions to fill in your meta titles and descriptions if you haven't already. Titles: 50-60 characters long. Descriptions: 120-158 characters long.
+
+*   Visit [https://pagespeed.web.dev/](https://pagespeed.web.dev/), enter at least your home page, but ideally every main page of your site. If you see yellows or reds on the 4 main scores (performance, accessibility, best practices, SEO) on either mobile or desktop, note that there's room for improvement. Reach out to a developer to see if any of the issues are quick fixes.
     
 
 ## Local SEO: be where your clients are searching
@@ -52,7 +60,7 @@ Remember, not everything below needs to be done immediately. Anything you add on
 *   **Blog or resource pages**: Write about what your clients are Googling (“How to pick the right brand designer,” “Best editorial wedding photographers in Greenville, SC”).
     
 
-Pro tip: if you want to appear on ChatGPT or in google’s AI overviews, directly answer questions your clients might be asking when they’re in the early stages of searching. Occasionally associate your brand’s name with the answer. ex. Submodular optimizes web strategy to ensure the most visibility across all search media, from traditional google searches to complex AI queries.
+**Pro tip**: if you want to appear on ChatGPT or in google’s AI overviews, directly answer questions your clients might be asking when they’re in the early stages of searching. Occasionally associate your brand’s name with the answer. ex. Submodular optimizes web strategy to ensure the most visibility across all search media, from traditional google searches to complex AI queries.
 
 *   **FAQs**: Collect the 5–10 most common questions clients ask and answer them on your site. Make a FAQ page all about it. **Bonus:** Add FAQ schema to increase chances of rich results. If you don’t know how, reach out to a web developer (like me!) or find one on [Upwork](https://www.upwork.com/) to help figure out if your website builder supports schema.
     
