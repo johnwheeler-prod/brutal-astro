@@ -25,13 +25,14 @@ const builtWith = [
 
 <Layout
   title='Home'
-  pageTitle='John Wheeler | Home'
+  pageTitle='John Wheeler | Home'
   description='John Wheeler is a web developer and AEO specialist, working to shape the future of Tehcnical SEO and AEO.'
 >
   <main class='bg-pink p-6'>
     <MobileSocials />
     <section id='about' class='grid md:grid-cols-8 gap-8 mt-4'>
       <h2 class='hidden'>About John Wheeler</h2>
+
       <div class='col-span-4'>
         <Card>
           <div class='flex flex-col justify-between items-start gap-4'>
@@ -47,6 +48,7 @@ const builtWith = [
           </div>
         </Card>
       </div>
+
       <div class='col-span-2'>
         <Card>
           <h2 class='text-2xl md:text-4xl lg:text-6xl mb-8 dm-serif'>
@@ -72,6 +74,7 @@ const builtWith = [
           </ul>
         </Card>
       </div>
+
       <div class='col-span-2'>
         <Card>
           <h2 class='text-2xl md:text-4xl lg:text-6xl mb-4 dm-serif'>
@@ -84,5 +87,67 @@ const builtWith = [
       </div>
     </section>
     <RecentBlogPosts />
+    <section id='more-about-me' class='grid md:grid-cols-8 gap-8 mt-4'>    
+      <div class='col-span-4'>
+        <Card client:load>
+          <h2 class="text-2xl md:text-4xl lg:text-6xl mb-4 dm-serif">
+            What I’m listening to
+          </h2>
+        
+          <div class="relative w-full h-[352px]">
+            <iframe
+              id="spotify-frame-1"
+              class="absolute inset-0 w-full h-full rounded-xl transition-opacity duration-700 opacity-100 z-10"
+              src="https://open.spotify.com/embed/album/3hKlec1wgYVJcI0YvwCFJB?utm_source=generator"
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+              loading="lazy"
+            ></iframe>
+        
+            <iframe
+              id="spotify-frame-2"
+              class="absolute inset-0 w-full h-full rounded-xl transition-opacity duration-700 opacity-0 z-0"
+              src=""
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+              loading="lazy"
+            ></iframe>
+          </div>
+        
+          <script is:inline>
+            const embeds = [
+              "https://open.spotify.com/embed/album/3hKlec1wgYVJcI0YvwCFJB?utm_source=generator",
+              "https://open.spotify.com/embed/album/1QZJzByKliJB2xyhgrYk4j?utm_source=generator",
+              "https://open.spotify.com/embed/album/3g4koxypokRF6kR3KA5F0P?utm_source=generator"
+            ];
+        
+            let index = 0;
+            let active = 1;
+        
+            const frame1 = document.getElementById("spotify-frame-1");
+            const frame2 = document.getElementById("spotify-frame-2");
+        
+            setInterval(() => {
+              index = (index + 1) % embeds.length;
+              const nextFrame = active === 1 ? frame2 : frame1;
+              const currentFrame = active === 1 ? frame1 : frame2;
+        
+              // preload next embed
+              nextFrame.src = embeds[index];
+        
+              // fade out current, fade in next
+              currentFrame.classList.add("opacity-0");
+              currentFrame.classList.remove("z-10");
+              currentFrame.classList.add("z-0");
+        
+              nextFrame.classList.remove("opacity-0");
+              nextFrame.classList.remove("z-0");
+              nextFrame.classList.add("z-10");
+        
+              // swap active
+              active = active === 1 ? 2 : 1;
+            }, 8000);
+          </script>
+        </Card>        
+      </div>
+    </section>
   </main>
 </Layout>
