@@ -22,11 +22,6 @@ const builtWith = [
   { name: 'NHL', url: 'https://www.nhl.com/bruins/' },
 ];
 
-const spotifyEmbeds = [
-  "https://open.spotify.com/embed/album/3hKlec1wgYVJcI0YvwCFJB?utm_source=generator",
-  "https://open.spotify.com/embed/album/1QZJzByKliJB2xyhgrYk4j?utm_source=generator",
-  "https://open.spotify.com/embed/album/1ATL5GLyefJaxhQzSPVrLX?utm_source=generator",
-];
 ---
 
 <Layout
@@ -91,7 +86,9 @@ const spotifyEmbeds = [
           </p>
         </Card>
       </div>
-
+    </section>
+    <RecentBlogPosts />
+    <section id='more-about-me' class='grid md:gird-cols-8 gap-8 mt-4'>
       <div class='col-span-4'>
         <Card client:load>
           <h2 class="text-2xl md:text-4xl lg:text-6xl mb-4 dm-serif">
@@ -123,8 +120,7 @@ const spotifyEmbeds = [
             }, 8000);
           </script>
         </Card>
-      </div>
+      </div>    
     </section>
-    <RecentBlogPosts />
   </main>
 </Layout>
