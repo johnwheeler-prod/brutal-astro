@@ -12,14 +12,6 @@ layout: '../../layouts/BlogPost.astro'
 
 # A double edged skill: AI in hiring and the resume filtering paradox
 
-## A changing landscape in AI with respect to hiring
-
-Start writing about job postings requiring AI skills, but adding filters to remove AI optimized resumes (filtering out resume’s with bolded keywords, etc.)
-
-Stream of consciousness thoughts that need organizing:Auto-rejections from companies using AI to parse and filter resumesA growing sentiment on LinkedIn from a variety of voices saying things like:”bolded keywords on the resume immediately let me know the resume is AI generated or augmented, and I immediately reject it”A growing sentiment in job postings asking whether you use AI to augment your work and increase your productivity: seems like a double standardA total lack of visibility into how AI tools actually parse and filter resumes: hint, it’s not an algorithm based on keywords, because LLMs are not algorithms, they’re complex language generators that often and confidently get the answer wrongTie back to a previous article I wrote about the growing AEO discipline compared to/augmenting technical SEO (different answers for the same prompts across multiple users, user embeddings to tune answer synthesis, etc).
-
-The fundamental question: is someone in the wrong? Is there a lesson on exactly how much to use AI to optimize for ATS?
-
 ## 1\. The changing hiring landscape
 
 *   A little over a year ago, while I was in the depths of job applications, resume optimizations, and cover letter writing, I noticed an emerging trend. A yes or no checkbox or dropdown with something to the effect of “Do you use AI tools like ChatGPT or Claude to improve your personal productivity?”
