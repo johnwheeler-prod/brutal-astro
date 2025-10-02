@@ -3,7 +3,7 @@ title: Answer engine obscurity - How a simple UI is holding back the future of A
 pubDate: "September 15, 2025"
 author: John Wheeler
 tags:
-  - GEO/AEO
+  - GEO AEO
   - SEO
   - Web Development
 imgUrl: '../../assets/answer_engine_obscurity/ai_clarification.jpg'
