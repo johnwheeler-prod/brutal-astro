@@ -3,7 +3,7 @@ title: Answer engine obscurity - How a simple UI is holding back the future of A
 pubDate: "September 15, 2025"
 author: John Wheeler
 tags:
-  - AEO
+  - GEO AEO
   - SEO
   - Web Development
 imgUrl: '../../assets/answer_engine_obscurity/ai_clarification.jpg'
@@ -14,6 +14,8 @@ layout: '../../layouts/BlogPost.astro'
 # Answer engine obscurity - How a simple UI is holding back the future of AEO
 
 Updated on September 16, 2025 to [address emerging information regarding the great decoupling](#three-things-seo-and-content-teams-can-do-right-now)
+
+Updated on September 29, 2025 to note that GEO, or Generative Engine Optimization is gaining significant traction as the term that will eventually be utilized to refer to this new era of search optimization
 
 ## The traditional SEO disconnect
 
