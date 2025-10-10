@@ -1,6 +1,5 @@
 ---
 import LocalFont from '../generic/LocalFont.astro';
-import { ViewTransitions } from 'astro:transitions';
 
 interface Props {
   title: string;
@@ -79,14 +78,12 @@ const webSiteSchema = {
   <title>John Wheeler | {title}</title>
 
 <!-- Global Schema -->
-<script type="application/ld+json" set:html={JSON.stringify([personSchema, webSiteSchema])}></script>
+<script type="application/ld+json" set:html={JSON.stringify([personSchema, webSiteSchema])} is:inline></script>
 
 <!-- Page Schema -->
 {pageSchema && (
-  <script type="application/ld+json" set:html={JSON.stringify(pageSchema)}></script>
+  <script type="application/ld+json" set:html={JSON.stringify(pageSchema)} is:inline></script>
 )}
-
-  <ViewTransitions />
 
   <slot />
 </head>

@@ -3,9 +3,6 @@ import sitemap from '@astrojs/sitemap';
 import UnoCSS from 'unocss/astro';
 
 export default defineConfig({
-  legacy: {
-    collections: true
-  },
   // used to generate images
   site:
     process.env.VERCEL_ENV === 'production'

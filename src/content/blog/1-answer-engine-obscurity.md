@@ -8,7 +8,6 @@ tags:
   - Web Development
 imgUrl: '../../assets/answer_engine_obscurity/ai_clarification.jpg'
 description: Discover why traditional SEO fails with AI search engines like ChatGPT and Google's AI Overviews. Learn how simple AI interfaces hide complex semantic processing that changes content optimization forever. Essential reading for SEO professionals adapting to Answer Engine Optimization (AEO) in 2025.
-layout: '../../layouts/BlogPost.astro'
 ---
 
 # Answer engine obscurity - How a simple UI is holding back the future of AEO

@@ -8,7 +8,6 @@ tags:
   - Web Development
 imgUrl: '../../assets/seo_for_small_business/GA4_image.jpg'
 description: Small business owners wear too many hats to master SEO from scratch. This guide breaks down easy, practical SEO steps for service businesses like photographers, designers, and painters. Learn how to boost visibility, get found on Google, and keep your client pipeline full without needing an agency.
-layout: '../../layouts/BlogPost.astro'
 ---
 
 # SEO to-dos for small business owners
