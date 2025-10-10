@@ -7,8 +7,7 @@ tags:
   - GEO AEO
   - Web Development
 imgUrl: '../../assets/openai_google_feuding/google_vs_openai.jpg'
-description: Google’s removal of the &num=100 search parameter has shaken SEO tools, fueling speculation of a brewing rivalry with OpenAI. With Google hiring an Anti-Scraper Analyst and OpenAI posting a Growth role in SEO, the fight for AI search dominance is heating up.
-layout: '../../layouts/BlogPost.astro'
+description: Google's removal of the &num=100 search parameter has shaken SEO tools, fueling speculation of a brewing rivalry with OpenAI. With Google hiring an Anti-Scraper Analyst and OpenAI posting a Growth role in SEO, the fight for AI search dominance is heating up.
 ---
 
 # Google and OpenAI feuding?

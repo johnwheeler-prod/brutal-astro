@@ -9,7 +9,6 @@ tags:
   - SEO
 imgUrl: '../../assets/death_of_click_through/circuit.jpg'
 description: AI-driven answers are reshaping SEO, GEO, and AEO. Is the click-through dying? Explore how AI overviews shift search, traffic, and brand visibility.
-layout: '../../layouts/BlogPost.astro'
 ---
 
 # Extrapolating a guess: is AI the eventual death of the click through?

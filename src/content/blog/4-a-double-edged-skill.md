@@ -7,7 +7,6 @@ tags:
   - AI
 imgUrl: '../../assets/a_double_edged_skill/open-ai.jpg'
 description: Explore how AI is reshaping hiring, from resume filtering tools to recruiter skepticism, and why job seekers and employers face a paradox when AI skills are both required and penalized.
-layout: '../../layouts/BlogPost.astro'
 ---
 
 # A double edged skill: AI in hiring and the resume filtering paradox

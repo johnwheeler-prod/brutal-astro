@@ -1,13 +1,13 @@
 import {
   defineConfig,
   presetIcons,
-  presetWind,
+  presetMini,
   presetTypography,
 } from 'unocss';
 
 export default defineConfig({
   presets: [
-    presetWind(),
+    presetMini(),
     presetIcons({
       collections: {
         logos: () =>
