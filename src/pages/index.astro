@@ -2,6 +2,7 @@
 import Layout from '@layouts/Default.astro';
 import RecentBlogPosts from '@components/generic/RecentBlogPosts.astro';
 import MobileSocials from '@components/home/MobileSocials.astro';
+import SpotifyPlayer from '@components/generic/SpotifyPlayer.astro';
 import { Pill } from '@eliancodes/brutal-ui';
 import { Button } from '@eliancodes/brutal-ui';
 import { Card } from '@eliancodes/brutal-ui';
@@ -92,37 +93,7 @@ const builtWith = [
     <section id='more-about-me' class='grid md:grid-cols-8 gap-8 mt-4'>
       <div class='col-span-4'>
         <Card>
-          <h2 class="text-2xl md:text-4xl lg:text-6xl mb-4 dm-serif">
-            What I’m listening to
-          </h2>
-          <iframe
-            id="spotify-frame"
-            style="border-radius:12px"
-            src="https://open.spotify.com/embed/album/3hKlec1wgYVJcI0YvwCFJB?utm_source=generator"
-            width="100%"
-            height="352"
-            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-            loading="lazy"
-          ></iframe>
-        
-          <script is:inline>
-            const embeds = [
-              "https://open.spotify.com/embed/album/3hKlec1wgYVJcI0YvwCFJB?utm_source=generator",
-              "https://open.spotify.com/embed/album/1QZJzByKliJB2xyhgrYk4j?utm_source=generator",
-              "https://open.spotify.com/embed/album/3g4koxypokRF6kR3KA5F0P?utm_source=generator",
-              "https://open.spotify.com/embed/album/0U0Qv2jYtsgGxFDpQJKAxQ?utm_source=generator",
-              "https://open.spotify.com/embed/album/5QGv6b6i7tIOksucTpcUau?utm_source=generator",
-              "https://open.spotify.com/embed/album/3MCABaEqPmI82mgE6OVYoB?utm_source=generator",
-            ];
-        
-            let index = 0;
-            const frame = document.getElementById("spotify-frame");
-        
-            setInterval(function () {
-              index = (index + 1) % embeds.length;
-              frame.src = embeds[index];
-            }, 8000);
-          </script>
+          <SpotifyPlayer />
         </Card>
       </div>    
     </section>

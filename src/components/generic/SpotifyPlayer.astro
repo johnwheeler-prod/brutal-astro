@@ -1,0 +1,272 @@
+---
+// This component will fetch Spotify data client-side and display it
+---
+
+<div class="spotify-container">
+  <h2 class="text-2xl md:text-4xl lg:text-6xl mb-4 dm-serif">
+    What I'm listening to
+  </h2>
+  
+  <div class="spotify-content">
+    <!-- Loading state -->
+    <div id="spotify-loading" class="loading-state">
+      <div class="loading-spinner"></div>
+      <p class="poppins text-gray-600 mt-4">Loading your music...</p>
+    </div>
+    
+    <!-- Error state -->
+    <div id="spotify-error" class="error-state hidden">
+      <p class="poppins text-red-600">Unable to load music data</p>
+      <button id="retry-btn" class="retry-button mt-2">Retry</button>
+    </div>
+    
+    <!-- Main content -->
+    <div id="spotify-main" class="main-content hidden">
+      <div class="current-album mb-6">
+        <iframe
+          id="spotify-frame"
+          style="border-radius:12px"
+          width="100%"
+          height="352"
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+          loading="lazy"
+          style="border: 0;"
+        ></iframe>
+      </div>
+      
+      <!-- Album info -->
+      <div id="album-info" class="album-info hidden">
+        <h3 id="album-name" class="album-name outfit text-lg font-semibold"></h3>
+        <p id="album-artist" class="album-artist poppins text-sm text-gray-600"></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  interface SpotifyAlbum {
+    id: string;
+    name: string;
+    artists: Array<{ name: string }>;
+    external_urls: {
+      spotify: string;
+    };
+    images: Array<{
+      url: string;
+      height: number;
+      width: number;
+    }>;
+    release_date: string;
+  }
+
+  interface SpotifyResponse {
+    success: boolean;
+    albums: SpotifyAlbum[];
+    error?: string;
+  }
+
+  class SpotifyPlayer {
+    private albums: SpotifyAlbum[] = [];
+    private currentIndex = 0;
+    private retryCount = 0;
+    private maxRetries = 3;
+
+    constructor() {
+      this.init();
+    }
+
+    private async init() {
+      await this.loadAlbums();
+      this.setupEventListeners();
+    }
+
+    private async loadAlbums() {
+      try {
+        this.showLoading();
+        
+        const response = await fetch('/api/spotify/top-albums');
+        const data: SpotifyResponse = await response.json();
+        
+        if (data.success && data.albums.length > 0) {
+          this.albums = data.albums;
+          this.startCycling();
+          this.showMain();
+        } else {
+          throw new Error(data.error || 'No albums found');
+        }
+      } catch (error) {
+        console.error('Failed to load Spotify albums:', error);
+        this.handleError();
+      }
+    }
+
+    private startCycling() {
+      if (this.albums.length === 0) return;
+      
+      // Show first album immediately
+      this.showAlbum(0);
+      
+      // Start cycling if there are multiple albums
+      if (this.albums.length > 1) {
+        setInterval(() => {
+          this.currentIndex = (this.currentIndex + 1) % this.albums.length;
+          this.showAlbum(this.currentIndex);
+        }, 8000); // Change every 8 seconds
+      }
+    }
+
+    private showAlbum(index: number) {
+      const album = this.albums[index];
+      if (!album) return;
+
+      const frame = document.getElementById('spotify-frame') as HTMLIFrameElement;
+      const albumName = document.getElementById('album-name');
+      const albumArtist = document.getElementById('album-artist');
+      const albumInfo = document.getElementById('album-info');
+
+      if (frame) {
+        frame.src = `https://open.spotify.com/embed/album/${album.id}?utm_source=generator`;
+      }
+
+      if (albumName && albumArtist && albumInfo) {
+        albumName.textContent = album.name;
+        albumArtist.textContent = album.artists.map(artist => artist.name).join(', ');
+        albumInfo.classList.remove('hidden');
+      }
+    }
+
+    private showLoading() {
+      const loading = document.getElementById('spotify-loading');
+      const error = document.getElementById('spotify-error');
+      const main = document.getElementById('spotify-main');
+
+      loading?.classList.remove('hidden');
+      error?.classList.add('hidden');
+      main?.classList.add('hidden');
+    }
+
+    private showMain() {
+      const loading = document.getElementById('spotify-loading');
+      const error = document.getElementById('spotify-error');
+      const main = document.getElementById('spotify-main');
+
+      loading?.classList.add('hidden');
+      error?.classList.add('hidden');
+      main?.classList.remove('hidden');
+    }
+
+    private showError() {
+      const loading = document.getElementById('spotify-loading');
+      const error = document.getElementById('spotify-error');
+      const main = document.getElementById('spotify-main');
+
+      loading?.classList.add('hidden');
+      error?.classList.remove('hidden');
+      main?.classList.add('hidden');
+    }
+
+    private handleError() {
+      if (this.retryCount < this.maxRetries) {
+        this.retryCount++;
+        setTimeout(() => this.loadAlbums(), 2000 * this.retryCount);
+      } else {
+        this.showError();
+      }
+    }
+
+    private setupEventListeners() {
+      const retryBtn = document.getElementById('retry-btn');
+      retryBtn?.addEventListener('click', () => {
+        this.retryCount = 0;
+        this.loadAlbums();
+      });
+    }
+  }
+
+  // Initialize when DOM is loaded
+  document.addEventListener('DOMContentLoaded', () => {
+    new SpotifyPlayer();
+  });
+</script>
+
+<style>
+  .spotify-container {
+    width: 100%;
+  }
+  
+  .loading-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    min-height: 200px;
+  }
+  
+  .loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #1db954;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  .error-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    min-height: 200px;
+  }
+  
+  .retry-button {
+    background-color: #1db954;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    transition: background-color 0.2s;
+  }
+  
+  .retry-button:hover {
+    background-color: #1ed760;
+  }
+  
+  .main-content {
+    width: 100%;
+  }
+  
+  .current-album {
+    position: relative;
+  }
+  
+  .album-info {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin-top: 1rem;
+  }
+  
+  .album-name {
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+    color: #000;
+  }
+  
+  .album-artist {
+    color: #666;
+  }
+  
+  .hidden {
+    display: none;
+  }
+</style>
