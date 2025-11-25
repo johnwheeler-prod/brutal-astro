@@ -1,6 +1,7 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import UnoCSS from 'unocss/astro';
+import rehypeLazyImages from './src/utils/rehypeLazyImages';
 
 export default defineConfig({
   // used to generate images
@@ -12,6 +13,9 @@ export default defineConfig({
       : 'https://localhost:3000/',
   trailingSlash: 'ignore',
   integrations: [sitemap(), UnoCSS({ injectReset: true })],
+  markdown: {
+    rehypePlugins: [rehypeLazyImages],
+  },
   vite: {
     optimizeDeps: {
       exclude: ['@resvg/resvg-js'],

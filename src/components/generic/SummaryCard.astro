@@ -18,6 +18,9 @@ const { title, imgAlt, imgSrc, description } = Astro.props;
     <Image
       src={imgSrc}
       alt={imgAlt}
+      loading="lazy"
+      decoding="async"
+      sizes="(min-width: 1024px) 800px, 100vw"
       width={800}
       height={400}
       class="w-full object-cover object-center rounded"
