@@ -15,6 +15,7 @@ const getFontPath = (name: string) => join(appDir, "public", "fonts", name);
       fallback: "sans-serif",
       src: [
         {
+          preload: true,
           style: "normal",
           path: getFontPath("outfit.woff2"),
         },
@@ -27,7 +28,7 @@ const getFontPath = (name: string) => join(appDir, "public", "fonts", name);
       fallback: "sans-serif",
       src: [
         {
-          preload: false,
+          preload: true,
           style: "normal",
           path: getFontPath("poppins.woff2"),
         },
