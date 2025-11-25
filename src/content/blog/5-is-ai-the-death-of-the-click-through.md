@@ -7,7 +7,7 @@ tags:
   - AI
   - GEO AEO
   - SEO
-imgUrl: '../../assets/death_of_click_through/circuit.jpg'
+imgUrl: '../../assets/death_of_click_through/circuit.webp'
 description: AI-driven answers are reshaping SEO, GEO, and AEO. Is the click-through dying? Explore how AI overviews shift search, traffic, and brand visibility.
 ---
 
