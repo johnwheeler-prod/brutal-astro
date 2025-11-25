@@ -14,6 +14,9 @@
         style="border: 0; border-radius:12px"
       ></iframe>
     </div>
+    <button id="spotify-load-btn" class="spotify-load">
+      Load player
+    </button>
   </div>
 </div>
 
@@ -38,7 +41,7 @@
     frame.src = `https://open.spotify.com/embed/album/${album.id}?utm_source=generator`;
   };
 
-  document.addEventListener('DOMContentLoaded', () => {
+  const startPlayer = () => {
     let currentIndex = 0;
     setAlbum(currentIndex);
 
@@ -48,7 +51,35 @@
         setAlbum(currentIndex);
       }, CYCLE_MS);
     }
-  });
+  };
+
+  const bootOnInteraction = () => {
+    const loadBtn = document.getElementById('spotify-load-btn');
+    const frame = document.getElementById('spotify-frame') as HTMLIFrameElement | null;
+    if (!loadBtn || !frame) return;
+
+    const loadPlayer = () => {
+      loadBtn.remove();
+      startPlayer();
+    };
+
+    loadBtn.addEventListener('click', loadPlayer, { once: true });
+
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          loadPlayer();
+          observer.disconnect();
+        }
+      });
+      observer.observe(frame);
+    } else {
+      // Fallback: load on first interaction if IntersectionObserver is unavailable
+      loadPlayer();
+    }
+  };
+
+  document.addEventListener('DOMContentLoaded', bootOnInteraction);
 </script>
 
 <style>
@@ -62,5 +93,22 @@
 
   .current-album {
     position: relative;
+  }
+
+  .spotify-load {
+    background: #1db954;
+    color: #fff;
+    border: 2px solid #000;
+    border-radius: 0.5rem;
+    padding: 0.75rem 1.25rem;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .spotify-load:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 0 #000;
   }
 </style>
