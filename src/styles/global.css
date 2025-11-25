@@ -28,6 +28,34 @@ html strong {
   color: #000000;
 }
 
+:root {
+  color: #0f172a;
+}
+
+a {
+  color: inherit;
+}
+
+.bg-pink {
+  background-color: #ffe7f2;
+  color: #000;
+}
+
+.bg-green {
+  background-color: #e0f5e5;
+  color: #000;
+}
+
+.bg-purple {
+  background-color: #efe7ff;
+  color: #000;
+}
+
+.bg-blue {
+  background-color: #dff1ff;
+  color: #000;
+}
+
 ::selection
 {
   background-color: aliceblue;
