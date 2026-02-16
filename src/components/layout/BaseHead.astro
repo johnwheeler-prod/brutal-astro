@@ -5,6 +5,7 @@ interface Props {
   title: string;
   description: string;
   ogImage?: URL;
+  ogType?: string;
   pageSchema?: Record<string, any>;
 }
 
@@ -14,7 +15,7 @@ if (Astro.props.ogImage === undefined) {
   Astro.props.ogImage = new URL('/v1/generate/og/default.png', Astro.url);
 }
 
-const { title, description, ogImage, pageSchema } = Astro.props;
+const { title, description, ogImage, ogType = 'website', pageSchema } = Astro.props;
 
 const personSchema = {
   "@context": "https://schema.org",
@@ -23,7 +24,7 @@ const personSchema = {
   "url": "https://www.johnwheelerproduction.com/",
   "jobTitle": "Software and Web Engineer",
   "sameAs": [
-    "https://www.linkedin.com/in/john-wheeler",
+    "https://www.linkedin.com/in/john-wheeler-5697431b9/",
     "https://github.com/johnwheeler"
   ]
 };
@@ -67,14 +68,14 @@ const webSiteSchema = {
 
   <link
     rel='alternate'
-    href='https://johnwheelerproduction.com/blog.xml'
+    href='https://johnwheelerproduction.com/feed.xml'
     type='application/rss+xml'
   />
 
   <meta name='title' content={`John Wheeler | ${title}`} />
   <meta name='description' content={description} />
 
-  <meta property='og:type' content='website' />
+  <meta property='og:type' content={ogType} />
   <meta property='og:url' content={canonicalURL} />
   <meta property='og:title' content={title} />
   <meta property='og:description' content={description} />
