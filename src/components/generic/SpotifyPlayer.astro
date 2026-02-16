@@ -3,6 +3,17 @@
     What I'm listening to
   </h2>
 
+  <div class="spotify-controls">
+    <button id="spotify-prev" class="spotify-arrow" aria-label="Previous album">&#8592;</button>
+    <div class="spotify-progress-wrap">
+      <span id="spotify-count" class="spotify-count"></span>
+      <div class="progress-track" aria-hidden="true">
+        <div id="spotify-progress-fill" class="progress-fill"></div>
+      </div>
+    </div>
+    <button id="spotify-next" class="spotify-arrow" aria-label="Next album">&#8594;</button>
+  </div>
+
   <div class="spotify-content">
     <div class="current-album mb-6">
       <iframe
@@ -10,14 +21,13 @@
         width="100%"
         height="352"
         allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-        loading="lazy"
         title="Spotify album player"
-        style="border: 0; border-radius:12px"
+        style="border: 0; border-radius:12px;"
       ></iframe>
+      <div id="spotify-spinner" class="spotify-spinner" aria-label="Loading Spotify player" role="status">
+        <div class="spinner-ring"></div>
+      </div>
     </div>
-    <button id="spotify-load-btn" class="spotify-load">
-      Load player
-    </button>
   </div>
 </div>
 
@@ -30,62 +40,130 @@
     { id: '1QZJzByKliJB2xyhgrYk4j' },
     { id: '3g4koxypokRF6kR3KA5F0P' },
     { id: '0U0Qv2jYtsgGxFDpQJKAxQ' },
-    { id: '5QGv6b6i7tIOksucTpcUau' },
+    { id: '6kG4hK9mWCIzMdxOPciwe0' },
+    { id: '0r5fbvh1kX0pJ4AFmRxiwd' },
   ];
 
   const CYCLE_MS = 8000;
 
-  const setAlbum = (index: number) => {
-    const frame = document.getElementById('spotify-frame') as HTMLIFrameElement | null;
-    const album = albums[index % albums.length];
+  const frame    = document.getElementById('spotify-frame') as HTMLIFrameElement | null;
+  const spinner  = document.getElementById('spotify-spinner');
+  const fill     = document.getElementById('spotify-progress-fill');
+  const countEl  = document.getElementById('spotify-count');
+  const prevBtn  = document.getElementById('spotify-prev') as HTMLButtonElement | null;
+  const nextBtn  = document.getElementById('spotify-next') as HTMLButtonElement | null;
+
+  let currentIndex = 0;
+  let progressStart = 0;
+  let cycleTimer: ReturnType<typeof setTimeout> | null = null;
+  let rafId: number | null = null;
+
+  const updateCount = () => {
+    if (countEl) countEl.textContent = `${currentIndex + 1} / ${albums.length}`;
+  };
+
+  const tickProgress = () => {
+    if (!fill) return;
+    const elapsed = Date.now() - progressStart;
+    fill.style.width = `${Math.min((elapsed / CYCLE_MS) * 100, 100)}%`;
+    rafId = requestAnimationFrame(tickProgress);
+  };
+
+  const resetProgress = () => {
+    progressStart = Date.now();
+  };
+
+  const goTo = (index: number) => {
+    currentIndex = (index + albums.length) % albums.length;
+    const album = albums[currentIndex];
     if (!frame || !album) return;
     frame.src = `https://open.spotify.com/embed/album/${album.id}?utm_source=generator`;
+    updateCount();
+    resetProgress();
+    scheduleCycle();
+  };
+
+  const scheduleCycle = () => {
+    if (cycleTimer) clearTimeout(cycleTimer);
+    if (albums.length > 1) {
+      cycleTimer = setTimeout(() => goTo(currentIndex + 1), CYCLE_MS);
+    }
   };
 
   const startPlayer = () => {
-    let currentIndex = 0;
-    setAlbum(currentIndex);
+    goTo(0);
 
-    if (albums.length > 1) {
-      setInterval(() => {
-        currentIndex = (currentIndex + 1) % albums.length;
-        setAlbum(currentIndex);
-      }, CYCLE_MS);
-    }
+    frame?.addEventListener('load', () => spinner?.remove(), { once: true });
+
+    if (rafId) cancelAnimationFrame(rafId);
+    rafId = requestAnimationFrame(tickProgress);
+
+    prevBtn?.addEventListener('click', () => goTo(currentIndex - 1));
+    nextBtn?.addEventListener('click', () => goTo(currentIndex + 1));
   };
 
-  const bootOnInteraction = () => {
-    const loadBtn = document.getElementById('spotify-load-btn');
-    const frame = document.getElementById('spotify-frame') as HTMLIFrameElement | null;
-    if (!loadBtn || !frame) return;
-
-    const loadPlayer = () => {
-      loadBtn.remove();
-      startPlayer();
-    };
-
-    loadBtn.addEventListener('click', loadPlayer, { once: true });
-
-    if ('IntersectionObserver' in window) {
-      const observer = new IntersectionObserver((entries) => {
-        if (entries.some((entry) => entry.isIntersecting)) {
-          loadPlayer();
-          observer.disconnect();
-        }
-      });
-      observer.observe(frame);
-    } else {
-      // Fallback: load on first interaction if IntersectionObserver is unavailable
-      loadPlayer();
-    }
-  };
-
-  document.addEventListener('DOMContentLoaded', bootOnInteraction);
+  document.addEventListener('DOMContentLoaded', startPlayer);
 </script>
 
 <style>
   .spotify-container {
     width: 100%;
+  }
+
+  .spotify-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .spotify-arrow {
+    background: none;
+    border: 2px solid #000;
+    border-radius: 0.25rem;
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: background 0.1s ease, color 0.1s ease;
+  }
+
+  .spotify-arrow:hover {
+    background: #000;
+    color: #fff;
+  }
+
+  .spotify-progress-wrap {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .spotify-count {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.75rem;
+    color: #000;
+    opacity: 0.5;
+  }
+
+  .progress-track {
+    width: 100%;
+    height: 3px;
+    background: rgba(0, 0, 0, 0.12);
+    border-radius: 999px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    width: 0%;
+    background: #000;
+    border-radius: 999px;
   }
 
   .spotify-content {
@@ -96,20 +174,26 @@
     position: relative;
   }
 
-  .spotify-load {
-    background: #000;
-    color: #fff;
-    border: 2px solid #fff;
-    border-radius: 0.5rem;
-    padding: 0.75rem 1.25rem;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 600;
-    cursor: pointer;
-    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  .spotify-spinner {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background: rgba(0, 0, 0, 0.05);
   }
 
-  .spotify-load:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 6px 0 #000;
+  .spinner-ring {
+    width: 40px;
+    height: 40px;
+    border: 4px solid rgba(0, 0, 0, 0.15);
+    border-top-color: #000;
+    border-radius: 50%;
+    animation: spin 0.75s linear infinite;
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
   }
 </style>
