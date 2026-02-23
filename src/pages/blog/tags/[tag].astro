@@ -37,12 +37,48 @@ interface Props {
 }
 
 const { tag, blogposts } = Astro.props;
+
+// Custom titles and descriptions for each tag
+let customTitle, description, pageTitle;
+
+switch(tag) {
+  case 'ai':
+    customTitle = 'AI in Web Development & SEO: Expert Insights by John Wheeler';
+    description = 'Explore how AI is transforming web development, SEO, and hiring. Expert insights on AI overviews, resume filtering, and the future of search optimization.';
+    pageTitle = 'AI in Web Development & SEO: Expert Insights';
+    break;
+  case 'geo aeo':
+    customTitle = 'GEO vs AEO: Complete Guide to Google Experience & Answer Engine Optimization | John Wheeler';
+    description = 'Complete guide to GEO and AEO optimization strategies. Learn how Google Experience Optimization and Answer Engine Optimization are reshaping SEO in 2024.';
+    pageTitle = 'GEO vs AEO: Your Complete Guide to Modern Search Optimization';
+    break;
+  case 'seo':
+    customTitle = 'SEO Guides & AEO Strategies | Answer Engine Optimization Tips';
+    description = 'Expert SEO guides covering Answer Engine Optimization (AEO), AI search strategies, and small business SEO tactics. Learn how to optimize for ChatGPT, Google AI Overviews, and traditional search.';
+    pageTitle = 'SEO Guides & AEO Strategies';
+    break;
+  case 'small business':
+    customTitle = 'Small Business SEO Tips & Guides | John Wheeler - Marketing Consultant';
+    description = 'Practical SEO tips and marketing strategies for small business owners. Learn how to improve Google rankings, increase visibility, and grow your business online.';
+    pageTitle = 'Small Business SEO Tips and Marketing Guides';
+    break;
+  case 'web development':
+    customTitle = `John Wheeler | Blog: ${tag}`;
+    description = 'Explore John Wheeler\'s web development insights covering AI in SEO, answer engine optimization (AEO), and modern development practices. Expert analysis and actionable tips for developers.';
+    pageTitle = `Brutal Blog | Blogposts tagged with ${tag}`;
+    break;
+  default:
+    customTitle = `John Wheeler | Blog: ${tag}`;
+    description = `Brutal Blog | All posts tagged with ${tag}`;
+    pageTitle = `Brutal Blog | Blogposts tagged with ${tag}`;
+}
 ---
 
 <Layout
   title={`Blog: ${tag}`}
-  description={`Brutal Blog | All posts tagged with ${tag}`}
-  pageTitle={`Brutal Blog | Blogposts tagged with ${tag}`}
+  description={description}
+  pageTitle={pageTitle}
+  customTitle={customTitle}
 >
   <main class='p-6 bg-purple grid gap-4'>
     <div>

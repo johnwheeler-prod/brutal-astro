@@ -12,6 +12,18 @@ const { title, description, pubDate, updatedDate, image, author = "John Wheeler"
 const siteUrl = 'https://www.johnwheelerproduction.com';
 const url = `${siteUrl}${Astro.url.pathname}`;
 
+// Custom title logic for specific posts
+let customTitle;
+if (Astro.params.slug === '1-answer-engine-obscurity') {
+  customTitle = 'Answer Engine Obscurity: Simple UI Holding Back AEO | John Wheeler';
+} else if (Astro.params.slug === '2-seo-for-small-business') {
+  customTitle = 'SEO for Small Business Owners: Complete Guide to Get Found Online';
+} else if (Astro.params.slug === '3-openai-google-feuding') {
+  customTitle = 'Google vs OpenAI: The AI Search War Explained | John Wheeler';
+} else if (Astro.params.slug === '4-a-double-edged-skill') {
+  customTitle = 'AI in Hiring: The Resume Filtering Paradox';
+}
+
 const pageSchema = {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
@@ -44,6 +56,7 @@ const pageSchema = {
   ogImage={ogImage}
   ogType='article'
   pageSchema={pageSchema}
+  customTitle={customTitle}
 >
   <main class='p-6 lg:grid lg:grid-cols-3 flex justify-center'>
     <BlogSideBar headings={headings} />
