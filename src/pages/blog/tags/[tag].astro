@@ -1,53 +1,61 @@
 ---
-import { getCollection } from 'astro:content';
-import type { CollectionEntry } from 'astro:content';
 import Layout from '@layouts/Default.astro';
-import BlogList from '@components/blog/BlogList.astro';
-import { Button } from '@eliancodes/brutal-ui';
+import { getCollection } from 'astro:content';
+import BlogPostCard from '@components/blog/BlogPostCard.astro';
 
 export async function getStaticPaths() {
-  const allPosts = await getCollection('blog').then((collection) =>
-    collection.reverse()
-  );
-
-  const tags: string[] = [];
-
-  allPosts.forEach((post) => {
-    post.data.tags.forEach((tag) => {
-      tags.push(tag.toLowerCase());
-    });
-  });
-
-  return Array.from(new Set(tags)).map((tag) => {
-    return {
-      params: { tag },
-      props: {
-        tag,
-        blogposts: allPosts.filter((post) =>
-          post.data.tags.map((tag) => tag.toLowerCase()).includes(tag)
-        ),
-      },
-    };
-  });
+  const posts = await getCollection('blog');
+  const tags = [...new Set(posts.flatMap(post => post.data.tags || []))];
+  
+  return tags.map(tag => ({
+    params: { tag },
+    props: { posts: posts.filter(post => post.data.tags?.includes(tag)) }
+  }));
 }
 
-interface Props {
-  tag: string;
-  blogposts: CollectionEntry<'blog'>[];
-}
+const { tag } = Astro.params;
+const { posts } = Astro.props;
 
-const { tag, blogposts } = Astro.props;
+const siteUrl = 'https://www.johnwheelerproduction.com';
+const url = `${siteUrl}/blog/tags/${encodeURIComponent(tag)}/`;
+
+// Generate breadcrumbs for tag pages
+const breadcrumbs = [
+  { name: "Home", url: siteUrl },
+  { name: "Blog", url: `${siteUrl}/blog/` },
+  { name: tag, url: url }
+];
+
+// CollectionPage schema for tag archives
+const collectionSchema = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "url": url,
+  "name": `${tag} - Blog Posts`,
+  "description": `Blog posts tagged with ${tag}`,
+  "hasPart": posts.map(post => ({
+    "@type": "BlogPosting",
+    "headline": post.data.title,
+    "url": `${siteUrl}/blog/${post.slug}/`,
+    "datePublished": post.data.pubDate,
+    "dateModified": post.data.updatedDate || post.data.pubDate,
+    "description": post.data.description
+  }))
+};
 ---
 
 <Layout
-  title={`Blog: ${tag}`}
-  description={`Brutal Blog | All posts tagged with ${tag}`}
-  pageTitle={`Brutal Blog | Blogposts tagged with ${tag}`}
+  title={`${tag} - Blog Posts`}
+  description={`Blog posts tagged with ${tag}`}
+  pageSchema={collectionSchema}
+  breadcrumbs={breadcrumbs}
 >
-  <main class='p-6 bg-purple grid gap-4'>
-    <div>
-      <Button href='/blog/'>&larr; Back to blog</Button>
+  <main class="container mx-auto px-6 py-8">
+    <h1 class="text-4xl font-bold mb-8">{tag} Posts</h1>
+    <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {posts.map((post) => (
+        <BlogPostCard post={post} />
+      ))}
     </div>
-    <BlogList posts={blogposts} />
   </main>
 </Layout>

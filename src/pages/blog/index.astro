@@ -1,19 +1,56 @@
 ---
-import { getCollection } from 'astro:content';
 import Layout from '@layouts/Default.astro';
-import BlogList from '@components/blog/BlogList.astro';
+import { getCollection } from 'astro:content';
+import BlogPostCard from '@components/blog/BlogPostCard.astro';
 
-const posts = await getCollection('blog').then((collection) =>
-  collection.reverse()
+const posts = (await getCollection('blog')).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
+
+const siteUrl = 'https://www.johnwheelerproduction.com';
+const url = `${siteUrl}/blog/`;
+
+// Generate breadcrumbs for blog listing
+const breadcrumbs = [
+  { name: "Home", url: siteUrl },
+  { name: "Blog", url: url }
+];
+
+// Blog schema for the listing page
+const blogSchema = {
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "url": url,
+  "name": "John Wheeler's Blog",
+  "description": "Insights on web development, SEO, and AI from John Wheeler",
+  "author": {
+    "@type": "Person",
+    "name": "John Wheeler",
+    "url": siteUrl
+  },
+  "blogPost": posts.map(post => ({
+    "@type": "BlogPosting",
+    "headline": post.data.title,
+    "url": `${siteUrl}/blog/${post.slug}/`,
+    "datePublished": post.data.pubDate,
+    "dateModified": post.data.updatedDate || post.data.pubDate,
+    "description": post.data.description
+  }))
+};
 ---
 
 <Layout
-  title='Blog'
-  description='The Blog | On this page you can find a collection of blogposts'
-  pageTitle='The Blog'
+  title="Blog"
+  description="Insights on web development, SEO, and AI from John Wheeler"
+  pageSchema={blogSchema}
+  breadcrumbs={breadcrumbs}
 >
-  <main class='bg-green p-6'>
-    <BlogList posts={posts} />
+  <main class="container mx-auto px-6 py-8">
+    <h1 class="text-4xl font-bold mb-8">Blog</h1>
+    <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {posts.map((post) => (
+        <BlogPostCard post={post} />
+      ))}
+    </div>
   </main>
 </Layout>

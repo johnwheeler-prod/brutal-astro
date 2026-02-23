@@ -7,6 +7,7 @@ interface Props {
   ogImage?: URL;
   ogType?: string;
   pageSchema?: Record<string, any>;
+  breadcrumbs?: Array<{name: string, url: string}>;
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -15,7 +16,7 @@ if (Astro.props.ogImage === undefined) {
   Astro.props.ogImage = new URL('/v1/generate/og/default.png', Astro.url);
 }
 
-const { title, description, ogImage, ogType = 'website', pageSchema } = Astro.props;
+const { title, description, ogImage, ogType = 'website', pageSchema, breadcrumbs } = Astro.props;
 
 const personSchema = {
   "@context": "https://schema.org",
@@ -36,6 +37,18 @@ const webSiteSchema = {
   "name": "John Wheeler Production",
   "description": "Portfolio of John Wheeler"
 };
+
+// Generate breadcrumb schema if breadcrumbs are provided
+const breadcrumbSchema = breadcrumbs ? {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": breadcrumbs.map((crumb, index) => ({
+    "@type": "ListItem",
+    "position": index + 1,
+    "name": crumb.name,
+    "item": crumb.url
+  }))
+} : null;
 ---
 
 <head>
@@ -94,6 +107,11 @@ const webSiteSchema = {
 
 <!-- Global Schema -->
 <script type="application/ld+json" set:html={JSON.stringify([personSchema, webSiteSchema])} is:inline></script>
+
+<!-- Breadcrumb Schema -->
+{breadcrumbSchema && (
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} is:inline></script>
+)}
 
 <!-- Page Schema -->
 {pageSchema && (
