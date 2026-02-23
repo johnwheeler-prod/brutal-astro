@@ -37,12 +37,48 @@ interface Props {
 }
 
 const { tag, blogposts } = Astro.props;
+
+// Generate optimized titles and descriptions based on tag
+let title, description, pageTitle;
+
+switch(tag) {
+  case 'ai':
+    title = 'AI in Web Development & SEO: Expert Insights by John Wheeler';
+    description = 'Explore how AI is transforming web development, SEO, and hiring. Expert insights on AI overviews, resume filtering, and the future of search optimization.';
+    pageTitle = 'AI in Web Development & SEO: Expert Insights';
+    break;
+  case 'geo aeo':
+    title = 'GEO vs AEO: Complete Guide to Google Experience & Answer Engine Optimization | John Wheeler';
+    description = 'Complete guide to GEO and AEO optimization strategies. Learn how Google Experience Optimization and Answer Engine Optimization are reshaping SEO in 2024.';
+    pageTitle = 'GEO vs AEO: Your Complete Guide to Modern Search Optimization';
+    break;
+  case 'seo':
+    title = 'SEO Guides & AEO Strategies | Answer Engine Optimization Tips';
+    description = 'Expert SEO guides covering Answer Engine Optimization (AEO), AI search strategies, and small business SEO tactics. Learn how to optimize for ChatGPT, Google AI Overviews, and traditional search.';
+    pageTitle = 'SEO Guides & AEO Strategies';
+    break;
+  case 'small business':
+    title = 'Small Business SEO Tips & Guides | John Wheeler - Marketing Consultant';
+    description = 'Practical SEO tips and marketing strategies for small business owners. Learn how to improve Google rankings, increase visibility, and grow your business online.';
+    pageTitle = 'Small Business SEO Tips and Marketing Guides';
+    break;
+  case 'web development':
+    title = `Web Development Insights | John Wheeler`;
+    description = 'Explore John Wheeler\'s web development insights covering AI in SEO, answer engine optimization (AEO), and modern development practices. Expert analysis and actionable tips for developers.';
+    pageTitle = `Web Development Insights and Best Practices`;
+    break;
+  default:
+    title = `${tag.charAt(0).toUpperCase() + tag.slice(1)} Articles | John Wheeler`;
+    description = `Expert articles and insights about ${tag}. Practical guides and analysis from John Wheeler.`;
+    pageTitle = `${tag.charAt(0).toUpperCase() + tag.slice(1)} Articles and Insights`;
+}
 ---
 
 <Layout
-  title={`Blog: ${tag}`}
-  description={`Brutal Blog | All posts tagged with ${tag}`}
-  pageTitle={`Brutal Blog | Blogposts tagged with ${tag}`}
+  title={title}
+  description={description}
+  pageTitle={pageTitle}
+  includeAuthorInTitle={false}
 >
   <main class='p-6 bg-purple grid gap-4'>
     <div>

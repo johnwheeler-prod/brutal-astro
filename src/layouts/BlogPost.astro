@@ -12,6 +12,25 @@ const { title, description, pubDate, updatedDate, image, author = "John Wheeler"
 const siteUrl = 'https://www.johnwheelerproduction.com';
 const url = `${siteUrl}${Astro.url.pathname}`;
 
+// Generate optimized titles based on slug
+let optimizedTitle;
+switch(Astro.params.slug) {
+  case '1-answer-engine-obscurity':
+    optimizedTitle = 'Answer Engine Obscurity: Simple UI Holding Back AEO | John Wheeler';
+    break;
+  case '2-seo-for-small-business':
+    optimizedTitle = 'SEO for Small Business Owners: Complete Guide to Get Found Online';
+    break;
+  case '3-openai-google-feuding':
+    optimizedTitle = 'Google vs OpenAI: The AI Search War Explained | John Wheeler';
+    break;
+  case '4-a-double-edged-skill':
+    optimizedTitle = 'AI in Hiring: The Resume Filtering Paradox';
+    break;
+  default:
+    optimizedTitle = title;
+}
+
 const pageSchema = {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
@@ -39,11 +58,12 @@ const pageSchema = {
 ---
 
 <Layout
-  title={title as string}
+  title={optimizedTitle as string}
   description={description as string}
   ogImage={ogImage}
   ogType='article'
   pageSchema={pageSchema}
+  includeAuthorInTitle={false}
 >
   <main class='p-6 lg:grid lg:grid-cols-3 flex justify-center'>
     <BlogSideBar headings={headings} />

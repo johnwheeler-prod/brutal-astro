@@ -12,14 +12,15 @@ interface Props {
   ogImage?: URL;
   ogType?: string;
   pageSchema?: Record<string, any>;
+  includeAuthorInTitle?: boolean;
 }
 
-const { title, description, classList, ogImage, ogType, pageSchema } = Astro.props;
-const pageTitle = Astro.props.pageTitle ?? `John Wheeler | ${title}`;
+const { title, description, classList, ogImage, ogType, pageSchema, includeAuthorInTitle = true } = Astro.props;
+const pageTitle = Astro.props.pageTitle ?? (includeAuthorInTitle ? `John Wheeler | ${title}` : title);
 ---
 
 <html lang='en' class='h-full'>
-  <BaseHead ogImage={ogImage} ogType={ogType} title={title} description={description} pageSchema={pageSchema}/>
+  <BaseHead ogImage={ogImage} ogType={ogType} title={title} description={description} pageSchema={pageSchema} includeAuthorInTitle={includeAuthorInTitle}/>
 
   <body class:list={[classList]}>
     <!-- Google Tag Manager (noscript) -->

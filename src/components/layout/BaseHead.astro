@@ -7,6 +7,7 @@ interface Props {
   ogImage?: URL;
   ogType?: string;
   pageSchema?: Record<string, any>;
+  includeAuthorInTitle?: boolean;
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -15,7 +16,7 @@ if (Astro.props.ogImage === undefined) {
   Astro.props.ogImage = new URL('/v1/generate/og/default.png', Astro.url);
 }
 
-const { title, description, ogImage, ogType = 'website', pageSchema } = Astro.props;
+const { title, description, ogImage, ogType = 'website', pageSchema, includeAuthorInTitle = true } = Astro.props;
 
 const personSchema = {
   "@context": "https://schema.org",
@@ -36,6 +37,8 @@ const webSiteSchema = {
   "name": "John Wheeler Production",
   "description": "Portfolio of John Wheeler"
 };
+
+const finalTitle = includeAuthorInTitle ? `John Wheeler | ${title}` : title;
 ---
 
 <head>
@@ -72,7 +75,7 @@ const webSiteSchema = {
     type='application/rss+xml'
   />
 
-  <meta name='title' content={`John Wheeler | ${title}`} />
+  <meta name='title' content={finalTitle} />
   <meta name='description' content={description} />
 
   <meta property='og:type' content={ogType} />
@@ -90,7 +93,7 @@ const webSiteSchema = {
   <link rel='canonical' href={canonicalURL} />
   <link rel='icon' type='image/svg' href='/favicon.svg' />
 
-  <title>John Wheeler | {title}</title>
+  <title>{finalTitle}</title>
 
 <!-- Global Schema -->
 <script type="application/ld+json" set:html={JSON.stringify([personSchema, webSiteSchema])} is:inline></script>
