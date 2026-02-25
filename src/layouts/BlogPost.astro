@@ -12,9 +12,16 @@ const { title, description, pubDate, updatedDate, image, author = "John Wheeler"
 const siteUrl = 'https://www.johnwheelerproduction.com';
 const url = `${siteUrl}${Astro.url.pathname}`;
 
+// Generate breadcrumbs for blog posts
+const breadcrumbs = [
+  { name: 'Home', url: siteUrl },
+  { name: 'Blog', url: `${siteUrl}/blog/` },
+  { name: title, url: url }
+];
+
 const pageSchema = {
   "@context": "https://schema.org",
-  "@type": "BlogPosting",
+  "@type": "Article",
   "headline": title,
   "url": url,
   "datePublished": pubDate,
@@ -34,7 +41,8 @@ const pageSchema = {
   },
   "image": `${siteUrl}${image || ogImage}`,
   "description": description,
-  "mainEntityOfPage": url
+  "mainEntityOfPage": url,
+  "articleBody": description
 };
 ---
 
@@ -44,6 +52,7 @@ const pageSchema = {
   ogImage={ogImage}
   ogType='article'
   pageSchema={pageSchema}
+  breadcrumbs={breadcrumbs}
 >
   <main class='p-6 lg:grid lg:grid-cols-3 flex justify-center'>
     <BlogSideBar headings={headings} />
