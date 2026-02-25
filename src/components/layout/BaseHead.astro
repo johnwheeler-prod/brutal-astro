@@ -10,6 +10,8 @@ interface Props {
   breadcrumbs?: Array<{name: string, url: string}>;
   faqSchema?: Record<string, any>;
   collectionSchema?: Record<string, any>;
+  isHomepage?: boolean;
+  customTitle?: string;
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -18,7 +20,7 @@ if (Astro.props.ogImage === undefined) {
   Astro.props.ogImage = new URL('/v1/generate/og/default.png', Astro.url);
 }
 
-const { title, description, ogImage, ogType = 'website', pageSchema, breadcrumbs, faqSchema, collectionSchema } = Astro.props;
+const { title, description, ogImage, ogType = 'website', pageSchema, breadcrumbs, faqSchema, collectionSchema, isHomepage = false, customTitle } = Astro.props;
 
 const personSchema = {
   "@context": "https://schema.org",
@@ -31,6 +33,40 @@ const personSchema = {
     "https://github.com/johnwheeler"
   ]
 };
+
+// Enhanced Person schema for homepage
+const enhancedPersonSchema = isHomepage ? {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "John Wheeler",
+  "url": "https://www.johnwheelerproduction.com/",
+  "jobTitle": "Software and Web Engineer",
+  "knowsAbout": ["Web Development", "SEO", "Software Engineering", "JavaScript", "React", "Node.js"],
+  "offers": {
+    "@type": "Service",
+    "serviceType": "Web Development and SEO Services",
+    "description": "Professional web development, SEO optimization, and software engineering services"
+  },
+  "sameAs": [
+    "https://www.linkedin.com/in/john-wheeler-5697431b9/",
+    "https://github.com/johnwheeler"
+  ]
+} : personSchema;
+
+// ProfessionalService schema for homepage
+const professionalServiceSchema = isHomepage ? {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "John Wheeler Production",
+  "url": "https://www.johnwheelerproduction.com/",
+  "description": "Professional web development and SEO services",
+  "provider": {
+    "@type": "Person",
+    "name": "John Wheeler"
+  },
+  "serviceType": ["Web Development", "SEO Optimization", "Software Engineering"],
+  "areaServed": "Worldwide"
+} : null;
 
 const webSiteSchema = {
   "@context": "https://schema.org",
@@ -53,7 +89,8 @@ const breadcrumbSchema = breadcrumbs ? {
 } : null;
 
 // Combine all schemas into an array for efficient rendering
-const allSchemas: Record<string, any>[] = [personSchema, webSiteSchema];
+const allSchemas: Record<string, any>[] = [enhancedPersonSchema, webSiteSchema];
+if (professionalServiceSchema) allSchemas.push(professionalServiceSchema);
 if (breadcrumbSchema) allSchemas.push(breadcrumbSchema);
 if (pageSchema) allSchemas.push(pageSchema);
 if (faqSchema) allSchemas.push(faqSchema);
