@@ -8,6 +8,8 @@ interface Props {
   ogType?: string;
   pageSchema?: Record<string, any>;
   breadcrumbs?: Array<{name: string, url: string}>;
+  faqSchema?: Record<string, any>;
+  collectionSchema?: Record<string, any>;
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -16,7 +18,7 @@ if (Astro.props.ogImage === undefined) {
   Astro.props.ogImage = new URL('/v1/generate/og/default.png', Astro.url);
 }
 
-const { title, description, ogImage, ogType = 'website', pageSchema, breadcrumbs } = Astro.props;
+const { title, description, ogImage, ogType = 'website', pageSchema, breadcrumbs, faqSchema, collectionSchema } = Astro.props;
 
 const personSchema = {
   "@context": "https://schema.org",
@@ -49,6 +51,13 @@ const breadcrumbSchema = breadcrumbs ? {
     "item": crumb.url
   }))
 } : null;
+
+// Combine all schemas into an array for efficient rendering
+const allSchemas: Record<string, any>[] = [personSchema, webSiteSchema];
+if (breadcrumbSchema) allSchemas.push(breadcrumbSchema);
+if (pageSchema) allSchemas.push(pageSchema);
+if (faqSchema) allSchemas.push(faqSchema);
+if (collectionSchema) allSchemas.push(collectionSchema);
 ---
 
 <head>
@@ -105,18 +114,8 @@ const breadcrumbSchema = breadcrumbs ? {
 
   <title>John Wheeler | {title}</title>
 
-<!-- Global Schema -->
-<script type="application/ld+json" set:html={JSON.stringify([personSchema, webSiteSchema])} is:inline></script>
-
-<!-- Breadcrumb Schema -->
-{breadcrumbSchema && (
-  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} is:inline></script>
-)}
-
-<!-- Page Schema -->
-{pageSchema && (
-  <script type="application/ld+json" set:html={JSON.stringify(pageSchema)} is:inline></script>
-)}
+<!-- Combined Schema Markup -->
+<script type="application/ld+json" set:html={JSON.stringify(allSchemas)} is:inline></script>
 
   <slot />
 </head>
