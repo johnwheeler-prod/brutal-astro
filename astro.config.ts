@@ -1,5 +1,4 @@
 import { defineConfig } from 'astro/config';
-import sitemap from '@astrojs/sitemap';
 import UnoCSS from 'unocss/astro';
 import rehypeLazyImages from './src/utils/rehypeLazyImages';
 
@@ -12,7 +11,7 @@ export default defineConfig({
       ? `https://${process.env.VERCEL_URL}/`
       : 'https://localhost:3000/',
   trailingSlash: 'ignore',
-  integrations: [sitemap(), UnoCSS({ injectReset: true })],
+  integrations: [UnoCSS({ injectReset: true })],
   markdown: {
     rehypePlugins: [rehypeLazyImages],
   },
