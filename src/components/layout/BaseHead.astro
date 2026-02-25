@@ -20,25 +20,58 @@ if (Astro.props.ogImage === undefined) {
 
 const { title, description, ogImage, ogType = 'website', pageSchema, breadcrumbs, faqSchema, collectionSchema } = Astro.props;
 
+const siteUrl = 'https://www.johnwheelerproduction.com';
+
+// Enhanced Person schema for homepage
+const isHomepage = Astro.url.pathname === '/' || Astro.url.pathname === '';
 const personSchema = {
   "@context": "https://schema.org",
   "@type": "Person",
   "name": "John Wheeler",
-  "url": "https://www.johnwheelerproduction.com/",
+  "url": siteUrl,
   "jobTitle": "Software and Web Engineer",
   "sameAs": [
     "https://www.linkedin.com/in/john-wheeler-5697431b9/",
     "https://github.com/johnwheeler"
-  ]
+  ],
+  ...(isHomepage && {
+    "knowsAbout": ["Web Development", "SEO", "Software Engineering", "AI Integration"],
+    "hasOccupation": {
+      "@type": "Occupation",
+      "name": "Software and Web Engineer",
+      "occupationLocation": {
+        "@type": "Country",
+        "name": "United States"
+      }
+    }
+  })
 };
 
 const webSiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  "url": "https://www.johnwheelerproduction.com/",
+  "url": siteUrl,
   "name": "John Wheeler Production",
   "description": "Portfolio of John Wheeler"
 };
+
+// Professional Service schema for homepage
+const professionalServiceSchema = isHomepage ? {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "John Wheeler Production",
+  "url": siteUrl,
+  "description": "Professional web development and SEO services",
+  "serviceType": ["Web Development", "SEO Consulting", "Software Engineering"],
+  "provider": {
+    "@type": "Person",
+    "name": "John Wheeler"
+  },
+  "areaServed": {
+    "@type": "Country",
+    "name": "United States"
+  }
+} : null;
 
 // Generate breadcrumb schema if breadcrumbs are provided
 const breadcrumbSchema = breadcrumbs ? {
@@ -54,6 +87,7 @@ const breadcrumbSchema = breadcrumbs ? {
 
 // Combine all schemas into an array for efficient rendering
 const allSchemas: Record<string, any>[] = [personSchema, webSiteSchema];
+if (professionalServiceSchema) allSchemas.push(professionalServiceSchema);
 if (breadcrumbSchema) allSchemas.push(breadcrumbSchema);
 if (pageSchema) allSchemas.push(pageSchema);
 if (faqSchema) allSchemas.push(faqSchema);

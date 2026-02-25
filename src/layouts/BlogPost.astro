@@ -44,15 +44,49 @@ const pageSchema = {
   "mainEntityOfPage": url,
   "articleBody": description
 };
+
+// Generate optimized titles for specific blog posts
+const getOptimizedTitle = (title: string, slug: string | undefined) => {
+  if (!slug) return `${title} | John Wheeler`;
+  
+  switch (slug) {
+    case '1-answer-engine-obscurity':
+      return 'Answer Engine Obscurity: How Simple UI Holds Back AEO | John Wheeler';
+    case '2-seo-for-small-business':
+      return 'SEO Guide for Small Business Owners: Easy Steps to Get Found Online';
+    case '3-openai-google-feuding':
+      return 'Google vs OpenAI: The AI Search War Explained | John Wheeler';
+    default:
+      return `${title} | John Wheeler`;
+  }
+};
+
+// Generate optimized meta descriptions for specific posts
+const getOptimizedDescription = (description: string, slug: string | undefined) => {
+  if (!slug) return description;
+  
+  switch (slug) {
+    case '2-seo-for-small-business':
+      return 'Discover essential SEO strategies for small business owners. Master local search, get more customers, and grow your business online with these proven techniques.';
+    case '3-openai-google-feuding':
+      return 'Discover why Google\'s removal of the &num=100 search parameter signals an escalating AI search war with OpenAI. Learn what these strategic moves mean for SEO and the future of search dominance.';
+    default:
+      return description;
+  }
+};
+
+const optimizedTitle = getOptimizedTitle(title, Astro.params.slug);
+const optimizedDescription = getOptimizedDescription(description, Astro.params.slug);
 ---
 
 <Layout
   title={title as string}
-  description={description as string}
+  description={optimizedDescription}
   ogImage={ogImage}
   ogType='article'
   pageSchema={pageSchema}
   breadcrumbs={breadcrumbs}
+  customTitle={optimizedTitle}
 >
   <main class='p-6 lg:grid lg:grid-cols-3 flex justify-center'>
     <BlogSideBar headings={headings} />

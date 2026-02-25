@@ -13,14 +13,16 @@ interface Props {
   ogType?: string;
   pageSchema?: Record<string, any>;
   breadcrumbs?: Array<{name: string, url: string}>;
+  faqSchema?: Record<string, any>;
+  collectionSchema?: Record<string, any>;
 }
 
-const { title, description, classList, ogImage, ogType, pageSchema, breadcrumbs } = Astro.props;
+const { title, description, classList, ogImage, ogType, pageSchema, breadcrumbs, faqSchema, collectionSchema } = Astro.props;
 const pageTitle = Astro.props.pageTitle ?? `John Wheeler | ${title}`;
 ---
 
 <html lang='en' class='h-full'>
-  <BaseHead ogImage={ogImage} ogType={ogType} title={title} description={description} pageSchema={pageSchema} breadcrumbs={breadcrumbs}/>
+  <BaseHead ogImage={ogImage} ogType={ogType} title={title} description={description} pageSchema={pageSchema} breadcrumbs={breadcrumbs} faqSchema={faqSchema} collectionSchema={collectionSchema}/>
 
   <body class:list={[classList]}>
     <!-- Google Tag Manager (noscript) -->
