@@ -1,0 +1,128 @@
+---
+import { Card } from '@eliancodes/brutal-ui';
+
+const portalId = import.meta.env.PUBLIC_HUBSPOT_PORTAL_ID || 'YOUR_PORTAL_ID';
+const formId = import.meta.env.PUBLIC_HUBSPOT_FORM_ID || 'YOUR_FORM_ID';
+const region = import.meta.env.PUBLIC_HUBSPOT_REGION || 'na1';
+const isConfigured = portalId !== 'YOUR_PORTAL_ID' && formId !== 'YOUR_FORM_ID';
+---
+
+<Card>
+  <div class="flex flex-col gap-3">
+    <h2 class="text-2xl md:text-4xl lg:text-6xl dm-serif">Let’s work together</h2>
+    <p class="poppins text-base text-slate-700">
+      Drop your details and I’ll get back to you. Form is powered by HubSpot.
+    </p>
+    <div
+      id="hubspot-form"
+      class="hs-form-shell"
+      data-portal={portalId}
+      data-form={formId}
+      data-region={region}
+      aria-live="polite"
+      aria-busy={isConfigured ? 'true' : 'false'}
+    >
+      {isConfigured
+        ? ''
+        : 'Add PUBLIC_HUBSPOT_PORTAL_ID and PUBLIC_HUBSPOT_FORM_ID to enable the form.'}
+    </div>
+  </div>
+</Card>
+
+<script>
+  declare global {
+    interface Window {
+      hbspt?: { forms: { create: (opts: Record<string, unknown>) => void } };
+    }
+  }
+
+  const formShell = document.getElementById('hubspot-form');
+  if (!formShell) {
+    console.warn('HubSpot form container missing');
+  } else {
+    const portal = formShell.dataset.portal;
+    const form = formShell.dataset.form;
+    const region = formShell.dataset.region || 'na1';
+    const ready = portal && form && portal !== 'YOUR_PORTAL_ID' && form !== 'YOUR_FORM_ID';
+
+    const loadScript = () =>
+      new Promise((resolve, reject) => {
+        if (window.hbspt?.forms?.create) return resolve(true);
+        const existing = document.getElementById('hs-embed-script');
+        if (existing) {
+          existing.addEventListener('load', () => resolve(true), { once: true });
+          existing.addEventListener('error', reject, { once: true });
+          return;
+        }
+        const script = document.createElement('script');
+        script.id = 'hs-embed-script';
+        script.src = 'https://js.hsforms.net/forms/embed/v2.js';
+        script.async = true;
+        script.onload = () => resolve(true);
+        script.onerror = reject;
+        document.body.appendChild(script);
+      });
+
+    const renderForm = async () => {
+      if (!ready) return;
+      try {
+        const timeout = new Promise((_, rej) =>
+          setTimeout(() => rej(new Error('HubSpot timed out')), 6000)
+        );
+        formShell.textContent = '';
+        formShell.setAttribute('aria-busy', 'true');
+        await loadScript();
+        await Promise.race([timeout, Promise.resolve()]);
+        if (!window.hbspt?.forms?.create) throw new Error('HubSpot embed not available');
+        window.hbspt.forms.create({
+          region,
+          portalId: portal,
+          formId: form,
+          target: '#hubspot-form',
+        });
+        formShell.setAttribute('aria-busy', 'false');
+      } catch (err) {
+        console.error('HubSpot form failed to load', err);
+        formShell.innerHTML = `
+          <div class="hs-error">
+            Form failed to load. Please refresh or use <a href="mailto:hello@johnwheelerproduction.com">hello@johnwheelerproduction.com</a>.
+          </div>
+        `;
+        formShell.setAttribute('aria-busy', 'false');
+      }
+    };
+
+    const start = () => {
+      if (!ready) return;
+      renderForm();
+    };
+
+    if (document.readyState === 'complete' || document.readyState === 'interactive') {
+      start();
+    } else {
+      document.addEventListener('DOMContentLoaded', start, { once: true });
+    }
+  }
+</script>
+
+<style>
+  .hs-form-shell {
+    margin-top: 0.5rem;
+    background: transparent;
+  }
+
+  /* Mild overrides (free tier limits full control) */
+  :global(.hs-form) {
+    display: grid;
+    gap: 0.75rem;
+    background: transparent !important;
+    padding: 0 !important;
+    border: none !important;
+  }
+
+  :global(.hs-error) {
+    font-family: 'Poppins', sans-serif;
+    color: #b91c1c;
+    font-weight: 600;
+  }
+</style>

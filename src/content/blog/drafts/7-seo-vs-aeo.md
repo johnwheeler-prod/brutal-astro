@@ -6,7 +6,7 @@ tags:
   - AEO
   - SEO
   - GEO AEO
-imgUrl: '../../assets/placeholder.jpg'
+imgUrl: '../../../assets/astro.jpeg'
 description: Discover the critical differences between SEO and AEO, including strategies, metrics, and which approach works best for your content.
 draft: true
 ---

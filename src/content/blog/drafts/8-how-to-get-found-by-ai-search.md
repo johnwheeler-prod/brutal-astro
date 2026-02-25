@@ -6,7 +6,7 @@ tags:
   - AEO
   - SEO
   - GEO AEO
-imgUrl: '../../assets/placeholder.jpg'
+imgUrl: '../../../assets/astro.jpeg'
 description: Learn 7 proven strategies to optimize your content for AI search engines like ChatGPT, Perplexity, and Google AI for maximum visibility.
 draft: true
 ---

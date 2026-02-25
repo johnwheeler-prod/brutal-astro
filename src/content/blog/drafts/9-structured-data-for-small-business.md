@@ -5,7 +5,7 @@ author: John Wheeler
 tags:
   - SEO
   - Web Development
-imgUrl: '../../assets/placeholder.jpg'
+imgUrl: '../../../assets/astro.jpeg'
 description: Step-by-step guide to implementing structured data for small businesses. Boost local SEO and AI search visibility with schema markup.
 draft: true
 ---

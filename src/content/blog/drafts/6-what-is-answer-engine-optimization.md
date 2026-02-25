@@ -6,7 +6,7 @@ tags:
   - AEO
   - SEO
   - GEO AEO
-imgUrl: '../../assets/placeholder.jpg'
+imgUrl: '../../../assets/astro.jpeg'
 description: Learn what Answer Engine Optimization (AEO) is, how it differs from SEO, and why it's crucial for AI search visibility.
 draft: true
 ---
