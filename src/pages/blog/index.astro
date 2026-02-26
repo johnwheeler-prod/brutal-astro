@@ -11,7 +11,7 @@ const posts = await getCollection('blog', ({ data }) => !data.draft).then((colle
 <Layout
   title='Blog'
   description="Expert insights on SEO, AEO, and AI's impact on search. Practical guides for web developers and small business owners navigating the future of search optimization."
-  pageTitle='The Blog'
+  pageTitle='SEO & AEO Insights Blog | John Wheeler'
 >
   <main class='bg-green p-6'>
     <BlogList posts={posts} />

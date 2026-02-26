@@ -12,6 +12,8 @@ interface Props {
   collectionSchema?: Record<string, any>;
   isHomepage?: boolean;
   customTitle?: string;
+  isBlogIndex?: boolean;
+  blogPosts?: Array<{title: string, description: string, url: string, pubDate: string, author?: string}>;
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -20,7 +22,7 @@ if (Astro.props.ogImage === undefined) {
   Astro.props.ogImage = new URL('/v1/generate/og/default.png', Astro.url);
 }
 
-const { title, description, ogImage, ogType = 'website', pageSchema, breadcrumbs, faqSchema, collectionSchema, isHomepage = false, customTitle } = Astro.props;
+const { title, description, ogImage, ogType = 'website', pageSchema, breadcrumbs, faqSchema, collectionSchema, isHomepage = false, customTitle, isBlogIndex = false, blogPosts = [] } = Astro.props;
 
 const personSchema = {
   "@context": "https://schema.org",
@@ -76,6 +78,31 @@ const webSiteSchema = {
   "description": "Portfolio of John Wheeler"
 };
 
+// Blog schema for blog index page
+const blogSchema = isBlogIndex ? {
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "name": "John Wheeler's Blog",
+  "url": "https://www.johnwheelerproduction.com/blog/",
+  "description": "Insights on web development, SEO, and technology",
+  "author": {
+    "@type": "Person",
+    "name": "John Wheeler",
+    "url": "https://www.johnwheelerproduction.com/"
+  },
+  "blogPost": blogPosts.map(post => ({
+    "@type": "BlogPosting",
+    "headline": post.title,
+    "url": post.url,
+    "datePublished": post.pubDate,
+    "author": {
+      "@type": "Person",
+      "name": post.author || "John Wheeler"
+    },
+    "description": post.description
+  }))
+} : null;
+
 // Generate breadcrumb schema if breadcrumbs are provided
 const breadcrumbSchema = breadcrumbs ? {
   "@context": "https://schema.org",
@@ -91,6 +118,7 @@ const breadcrumbSchema = breadcrumbs ? {
 // Combine all schemas into an array for efficient rendering
 const allSchemas: Record<string, any>[] = [enhancedPersonSchema, webSiteSchema];
 if (professionalServiceSchema) allSchemas.push(professionalServiceSchema);
+if (blogSchema) allSchemas.push(blogSchema);
 if (breadcrumbSchema) allSchemas.push(breadcrumbSchema);
 if (pageSchema) allSchemas.push(pageSchema);
 if (faqSchema) allSchemas.push(faqSchema);

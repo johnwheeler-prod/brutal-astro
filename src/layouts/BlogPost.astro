@@ -44,6 +44,19 @@ const pageSchema = {
   "mainEntityOfPage": url,
   "articleBody": description
 };
+
+// Generate optimized titles for specific blog posts
+let customTitle;
+switch(Astro.params.slug) {
+  case '1-answer-engine-obscurity':
+    customTitle = 'Answer Engine Obscurity: How Simple UI Holds Back AEO Future';
+    break;
+  case '3-openai-google-feuding':
+    customTitle = 'Google and OpenAI Feuding? The Battle for AI Search Dominance';
+    break;
+  default:
+    customTitle = title;
+}
 ---
 
 <Layout
@@ -53,6 +66,7 @@ const pageSchema = {
   ogType='article'
   pageSchema={pageSchema}
   breadcrumbs={breadcrumbs}
+  customTitle={customTitle}
 >
   <main class='p-6 lg:grid lg:grid-cols-3 flex justify-center'>
     <BlogSideBar headings={headings} />

@@ -37,12 +37,47 @@ interface Props {
 }
 
 const { tag, blogposts } = Astro.props;
+
+// Generate optimized titles and descriptions based on tag
+let title, description, pageTitle;
+
+switch(tag) {
+  case 'ai':
+    title = 'AI Insights & Analysis | John Wheeler\'s Blog';
+    description = 'Explore AI insights on SEO, hiring, and web development. Expert analysis on artificial intelligence trends, tools, and industry impact from John Wheeler.';
+    pageTitle = 'AI Insights & Analysis | John Wheeler\'s Blog';
+    break;
+  case 'geo aeo':
+    title = 'GEO AEO Guide: Google Experience Optimization & Answer Engine Tips | John Wheeler';
+    description = 'Expert insights on Google Experience Optimization (GEO) and Answer Engine Optimization (AEO). Learn how AI search is changing SEO strategy and content optimization.';
+    pageTitle = 'GEO AEO: Google Experience & Answer Engine Optimization Guide';
+    break;
+  case 'seo':
+    title = 'SEO Tips and Guides | John Wheeler\'s Blog - Search Engine Optimization Resources';
+    description = 'Expert SEO guides covering AI search optimization, small business SEO, answer engine optimization (AEO), and Google algorithm insights. Practical tips from an SEO specialist.';
+    pageTitle = 'SEO Tips and Optimization Guides';
+    break;
+  case 'small business':
+    title = 'Small Business Tips & Growth Strategies | John Wheeler Blog';
+    description = 'Discover practical small business tips, SEO strategies, and growth advice for entrepreneurs. Expert insights to help your business succeed online and offline.';
+    pageTitle = 'Small Business Tips & Growth Strategies';
+    break;
+  case 'web development':
+    title = `Web Development Insights | John Wheeler Blog`;
+    description = 'Web development insights covering SEO, AI integration, and modern development practices. Expert analysis on technical implementation and digital marketing strategy.';
+    pageTitle = 'Web Development Insights & Best Practices';
+    break;
+  default:
+    title = `Blog: ${tag}`;
+    description = `All posts tagged with ${tag}`;
+    pageTitle = `Blogposts tagged with ${tag}`;
+}
 ---
 
 <Layout
-  title={`Blog: ${tag}`}
-  description={`Brutal Blog | All posts tagged with ${tag}`}
-  pageTitle={`Brutal Blog | Blogposts tagged with ${tag}`}
+  title={title}
+  description={description}
+  pageTitle={pageTitle}
 >
   <main class='p-6 bg-purple grid gap-4'>
     <div>
