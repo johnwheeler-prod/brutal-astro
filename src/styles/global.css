@@ -29,7 +29,7 @@ html strong {
 }
 
 :root {
-  color: #0f172a;
+  color: #1e293b;
 }
 
 a {
@@ -38,25 +38,26 @@ a {
 
 .bg-pink {
   background-color: #ffe7f2;
-  color: #000;
+  color: #1f2937;
 }
 
 .bg-green {
   background-color: #e0f5e5;
-  color: #000;
+  color: #1f2937;
 }
 
 .bg-purple {
   background-color: #efe7ff;
-  color: #000;
+  color: #1f2937;
 }
 
 .bg-blue {
   background-color: #dff1ff;
-  color: #000;
+  color: #1f2937;
 }
 
 ::selection
 {
-  background-color: aliceblue;
+  background-color: #3b82f6;
+  color: #ffffff;
 }
