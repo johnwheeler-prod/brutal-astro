@@ -19,6 +19,9 @@ const breadcrumbs = [
   { name: title, url: url }
 ];
 
+// Extract article body content from the rendered content
+const articleBodyContent = description || title;
+
 const pageSchema = {
   "@context": "https://schema.org",
   "@type": "Article",
@@ -42,7 +45,7 @@ const pageSchema = {
   "image": `${siteUrl}${image || ogImage}`,
   "description": description,
   "mainEntityOfPage": url,
-  "articleBody": description
+  "articleBody": articleBodyContent
 };
 
 // Generate optimized titles for specific blog posts
@@ -67,6 +70,7 @@ switch(Astro.params.slug) {
   pageSchema={pageSchema}
   breadcrumbs={breadcrumbs}
   customTitle={customTitle}
+  articleBody={articleBodyContent}
 >
   <main class='p-6 lg:grid lg:grid-cols-3 flex justify-center'>
     <BlogSideBar headings={headings} />
