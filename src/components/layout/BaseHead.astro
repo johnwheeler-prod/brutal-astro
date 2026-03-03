@@ -14,6 +14,9 @@ interface Props {
   customTitle?: string;
   isBlogIndex?: boolean;
   blogPosts?: Array<{title: string, description: string, url: string, pubDate: string, author?: string}>;
+  isTagPage?: boolean;
+  tagName?: string;
+  articleBody?: string;
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -22,7 +25,7 @@ if (Astro.props.ogImage === undefined) {
   Astro.props.ogImage = new URL('/v1/generate/og/default.png', Astro.url);
 }
 
-const { title, description, ogImage, ogType = 'website', pageSchema, breadcrumbs, faqSchema, collectionSchema, isHomepage = false, customTitle, isBlogIndex = false, blogPosts = [] } = Astro.props;
+const { title, description, ogImage, ogType = 'website', pageSchema, breadcrumbs, faqSchema, collectionSchema, isHomepage = false, customTitle, isBlogIndex = false, blogPosts = [], isTagPage = false, tagName, articleBody } = Astro.props;
 
 const personSchema = {
   "@context": "https://schema.org",
@@ -103,6 +106,26 @@ const blogSchema = isBlogIndex ? {
   }))
 } : null;
 
+// CollectionPage schema for tag pages
+const tagCollectionSchema = isTagPage && blogPosts.length > 0 ? {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": `${tagName} - Blog Posts`,
+  "url": canonicalURL.toString(),
+  "description": `Collection of blog posts about ${tagName}`,
+  "mainEntity": blogPosts.map(post => ({
+    "@type": "BlogPosting",
+    "headline": post.title,
+    "url": post.url,
+    "datePublished": post.pubDate,
+    "author": {
+      "@type": "Person",
+      "name": post.author || "John Wheeler"
+    },
+    "description": post.description
+  }))
+} : null;
+
 // Generate breadcrumb schema if breadcrumbs are provided
 const breadcrumbSchema = breadcrumbs ? {
   "@context": "https://schema.org",
@@ -119,6 +142,7 @@ const breadcrumbSchema = breadcrumbs ? {
 const allSchemas: Record<string, any>[] = [enhancedPersonSchema, webSiteSchema];
 if (professionalServiceSchema) allSchemas.push(professionalServiceSchema);
 if (blogSchema) allSchemas.push(blogSchema);
+if (tagCollectionSchema) allSchemas.push(tagCollectionSchema);
 if (breadcrumbSchema) allSchemas.push(breadcrumbSchema);
 if (pageSchema) allSchemas.push(pageSchema);
 if (faqSchema) allSchemas.push(faqSchema);
