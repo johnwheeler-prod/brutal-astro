@@ -36,29 +36,29 @@ Answer Engine Optimization (AEO) is the practice of optimizing content specifica
 
 Traditional search was a matching problem. You targeted a keyword, Google matched it to your page, and a list of blue links appeared.
 
-AI-powered search changes how that works. Think of it as replacing something you used to do yourself. The old system gave you 10 blue links, and you'd read, analyze, and distill some kind of learning or answer from those sources. Now that reading and analyzing happens for you, and you just get a synthesized answer. Your content isn't competing for a ranking slot anymore, it's competing to be incorporated into that response.
+AI-powered search changes how that works. Think of it as replacing something you used to do yourself. The old system gave you 10 blue links, and you'd read, analyze, and distill some kind of learning or answer from those sources. Now that reading and analyzing happens for you, and you just get a synthesized answer. As a writer, you want to shift thinking about ranking for a keyword into becoming an authority on a topic. This helps bridge the gap between keywords and prompts. Keywords are rigid, prompts end up softer and fuzzier around the edges.
 
 The mechanics underneath have shifted too. AI search processes queries through semantic understanding rather than keyword matching. The simple input box hides all of this complexity (a phenomenon I call [answer engine obscurity](/blog/1-answer-engine-obscurity/)), and that hidden complexity is exactly why so many traditional SEO tactics don't translate here.
 
-AEO is the practice of making your content legible to these systems. That means optimizing for how AI understands entities, context, and intent, not just which keywords you've packed into a title tag.
+AEO is the practice of making your content legible to these systems. That means optimizing for how AI understands entities, context, and intent, rather than which keywords you've packed into a title tag.
 
 ## AEO vs SEO: Key Differences
 
-SEO and AEO share a foundation: good content, technical hygiene, and legitimate authority still matter. But the goals diverge from there.
+SEO and AEO share a foundation: good content, technical hygiene, and legitimate authority still matter. From there, the goals begin to diverge.
 
-**Optimization target:** SEO optimizes for a position on a results page. AEO optimizes for inclusion in a synthesized response (a citation, a mention, a sourced answer). You're not trying to rank #1, you're trying to be the most semantically relevant answer to a question your ideal customer is asking.
+**Optimization target:** SEO optimizes for a position on a results page. AEO adds the need for semantic relevance—you're not just trying to rank, you're trying to be the most credible answer to a question so that an AI includes you in a synthesized response (as a citation, a mention, a sourced answer).
 
-**Content format:** SEO rewards density and structure optimized for crawlers. AEO rewards content that functions well as natural language source material (clear entities, direct answers, contextual depth that an AI can quote or paraphrase without distortion).
+**Content format:** SEO rewards density and structure optimized for crawlers. AEO adds the need for content that works as natural language source material—clear entities, direct answers, and contextual depth that an AI can quote or paraphrase without distortion.
 
-**Success metrics:** SEO success looks like rankings, organic traffic, and click-through rates. AEO success looks like AI citations, brand mentions in generated responses, and AI-sourced traffic showing up in your analytics. Many of these are harder to measure, and the tooling is still catching up.
+**Success metrics:** SEO success looks like rankings, organic traffic, and click-through rates. AEO adds AI citations, brand mentions in generated responses, and AI-sourced traffic as meaningful signals. Many of these are harder to measure, and the tooling is still catching up.
 
-**Authority signals:** Backlinks still matter. Semantic authority (being a recognized entity on a topic across multiple contexts) is increasingly important alongside link equity.
+**Authority signals:** Backlinks still matter. AEO adds semantic authority—being a recognized entity on a topic across multiple contexts—alongside link equity.
 
 ## AEO Implementation Strategies
 
-This is where most AEO content falls apart. Everyone agrees that "structured data is important" and "write conversationally." That's not a strategy, that's a checklist.
+The SEO is dead crowd knows structured data is important, and that writing conversationally, and often in answer first format, is worthwhile. The SEO is alive and well, and exactly the same as pre-AI crowd knows that as well. By the way, both of those crowds are remarkably smaller than you'd expect, they're just disproportionately loud on linkedin and their own blogs. Most of the trustworthy voices around fall somewhere in the middle, which is also where I find myself.
 
-Here's how I actually approach this with clients.
+Alright, now we can actually get into the things I actually recommend.
 
 ### Step 1: Don't abandon your SEO work
 
@@ -80,7 +80,7 @@ The key word is *pilot*. Don't try to be everywhere at once. Identify one or two
 
 Research how that community actually operates before you engage. What gets upvoted, what gets buried, what language is used, what's considered self-promotional versus genuinely useful. If you're thinking about Reddit, spend real time in the subreddits you're targeting before you post anything. Understand the norms. No heavy-handed marketing. No blatant ads dressed up as advice. Engage with the community and try to actually be helpful.
 
-If you mention your brand by name, it should be because it's immensely relevant to the conversation. Communities can tell the difference, and so can the AI systems trained on those communities.
+If you mention your brand by name, it should be because it's immensely relevant to the conversation. Communities can tell the difference, and you'll get moderated out of the subreddit before AI ever sees your comment or post.
 
 ### Step 3: Measure the right things early
 
@@ -104,19 +104,13 @@ Here's what I actually track:
 
 **CRM source attribution.** Traffic numbers mean more when they convert. The more useful signal is whether new contacts in your CRM are coming from AI platforms. This requires clean UTM discipline and a CRM that respects source attribution, but it's worth building early.
 
-**Direct brand queries.** Test the AI platforms yourself. Search for your brand, your core offering, your competitors. Note what they say. Do this consistently so you can track changes over time. This is manual work, but right now it's the best way to understand your brand's standing in AI-generated responses.
+**Brand sentiment.** A few free tools make this easier than starting from scratch. [HubSpot's AEO Grader](https://www.hubspot.com/aeo-grader), [Webflow's AEO Maturity Model](https://webflow.com/solutions/aeo), and [Profound's free AEO audit](https://www.tryprofound.com/aeo-report) all give you a structured starting point for understanding how AI platforms currently see your brand. Beyond those, query the platforms directly—search for your brand, your core offering, your competitors—and note what they say. Do this consistently so you can track shifts over time. It's manual work, but right now it's the most reliable way to understand where you actually stand.
 
 **Prompt volume (eventually).** As tooling develops, you'll be able to track how often your brand appears across AI responses in your category. This is a lagging indicator (it moves slowly and requires consistent content investment), but it's ultimately the most meaningful AEO metric. Build toward it, but don't let its absence stop you from starting.
 
-## Frequently Asked Questions
+## Some closing advice that isn't exactly AEO related
 
-**How does AEO differ from SEO?**
-
-SEO optimizes content to rank on a traditional search engine results page. AEO optimizes content to be included in AI-synthesized responses. The underlying mechanics work differently: AI operates probabilistically, processes queries through semantic understanding, and measures success in citations and brand mentions rather than rankings and click-through rates. That said, SEO and AEO share a foundation, and technical hygiene, page speed, accessibility, and original content that genuinely helps people are important to both.
-
-**Which search engines use answer engine optimization?**
-
-AEO is most relevant for AI-first platforms: ChatGPT Search, Perplexity, Google's AI Overviews (powered by Gemini), and Microsoft Copilot. Each extracts and presents content a little differently, but the core optimization principles apply across all of them (semantic clarity, entity authority, and content that functions as credible source material for natural language synthesis).
+There is massive value in starting to do something. You will always be inexperienced when you work on something new. What is important to realize now is that doing something in the next six weeks is usually better than doing the "right" or "perfect" thing (whatever that means) in six months.
 
 ---
 
