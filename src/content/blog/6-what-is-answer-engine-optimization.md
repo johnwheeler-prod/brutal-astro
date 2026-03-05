@@ -46,13 +46,13 @@ AEO is the practice of making your content legible to these systems. That means 
 
 SEO and AEO share a foundation: good content, technical hygiene, and legitimate authority still matter. From there, the goals begin to diverge.
 
-**Optimization target:** SEO optimizes for a position on a results page. AEO optimizes for inclusion in a synthesized response (a citation, a mention, a sourced answer). You're not trying to rank #1, you're trying to be the most semantically relevant answer to a question your ideal customer is asking.
+**Optimization target:** SEO optimizes for a position on a results page. AEO adds the need for semantic relevance—you're not just trying to rank, you're trying to be the most credible answer to a question so that an AI includes you in a synthesized response (as a citation, a mention, a sourced answer).
 
-**Content format:** SEO rewards density and structure optimized for crawlers. AEO rewards content that functions well as natural language source material (clear entities, direct answers, contextual depth that an AI can quote or paraphrase without distortion).
+**Content format:** SEO rewards density and structure optimized for crawlers. AEO adds the need for content that works as natural language source material—clear entities, direct answers, and contextual depth that an AI can quote or paraphrase without distortion.
 
-**Success metrics:** SEO success looks like rankings, organic traffic, and click-through rates. AEO success looks like AI citations, brand mentions in generated responses, and AI-sourced traffic showing up in your analytics. Many of these are harder to measure, and the tooling is still catching up.
+**Success metrics:** SEO success looks like rankings, organic traffic, and click-through rates. AEO adds AI citations, brand mentions in generated responses, and AI-sourced traffic as meaningful signals. Many of these are harder to measure, and the tooling is still catching up.
 
-**Authority signals:** Backlinks still matter. Semantic authority (being a recognized entity on a topic across multiple contexts) is increasingly important alongside link equity.
+**Authority signals:** Backlinks still matter. AEO adds semantic authority—being a recognized entity on a topic across multiple contexts—alongside link equity.
 
 ## AEO Implementation Strategies
 
