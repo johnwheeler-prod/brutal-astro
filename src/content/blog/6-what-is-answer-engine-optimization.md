@@ -44,7 +44,7 @@ AEO is the practice of making your content legible to these systems. That means 
 
 ## AEO vs SEO: Key Differences
 
-SEO and AEO share a foundation: good content, technical hygiene, and legitimate authority still matter. But the goals diverge from there.
+SEO and AEO share a foundation: good content, technical hygiene, and legitimate authority still matter. From there, the goals begin to diverge.
 
 **Optimization target:** SEO optimizes for a position on a results page. AEO optimizes for inclusion in a synthesized response (a citation, a mention, a sourced answer). You're not trying to rank #1, you're trying to be the most semantically relevant answer to a question your ideal customer is asking.
 
