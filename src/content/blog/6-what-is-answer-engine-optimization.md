@@ -40,7 +40,7 @@ AI-powered search changes how that works. Think of it as replacing something you
 
 The mechanics underneath have shifted too. AI search processes queries through semantic understanding rather than keyword matching. The simple input box hides all of this complexity (a phenomenon I call [answer engine obscurity](/blog/1-answer-engine-obscurity/)), and that hidden complexity is exactly why so many traditional SEO tactics don't translate here.
 
-AEO is the practice of making your content legible to these systems. That means optimizing for how AI understands entities, context, and intent, not just which keywords you've packed into a title tag.
+AEO is the practice of making your content legible to these systems. That means optimizing for how AI understands entities, context, and intent, rather than which keywords you've packed into a title tag.
 
 ## AEO vs SEO: Key Differences
 
