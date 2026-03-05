@@ -1,6 +1,6 @@
 ---
 title: What is Answer Engine Optimization (AEO)? Complete Guide
-pubDate: "February 25, 2026"
+pubDate: "March 5, 2026"
 author: John Wheeler
 tags:
   - AEO
@@ -8,7 +8,7 @@ tags:
   - GEO AEO
 imgUrl: '../../../assets/what_is_aeo/growtika-183Yxo3vsGY-unsplash.jpg'
 description: Learn what Answer Engine Optimization (AEO) is, how it differs from SEO, and why it's crucial for AI search visibility.
-draft: true
+draft: false
 ---
 
 <!-- BRIEF SUMMARY
