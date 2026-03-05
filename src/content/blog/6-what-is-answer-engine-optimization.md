@@ -56,9 +56,9 @@ SEO and AEO share a foundation: good content, technical hygiene, and legitimate 
 
 ## AEO Implementation Strategies
 
-This is where most AEO content falls apart. Everyone agrees that "structured data is important" and "write conversationally." That's not a strategy, that's a checklist.
+The SEO is dead crowd knows structured data is important, and that writing conversationally, and often in answer first format, is worthwhile. The SEO is alive and well, and exactly the same as pre-AI crowd knows that as well. By the way, both of those crowds are remarkably smaller than you'd expect, they're just disproportionately loud on linkedin and their own blogs. Most of the trustworthy voices around fall somewhere in the middle, which is also where I find myself.
 
-Here's how I actually approach this with clients.
+Alright, now we can actually get into the things I actually recommend.
 
 ### Step 1: Don't abandon your SEO work
 
@@ -112,7 +112,7 @@ Here's what I actually track:
 
 **How does AEO differ from SEO?**
 
-SEO optimizes content to rank on a traditional search engine results page. AEO optimizes content to be included in AI-synthesized responses. The underlying mechanics work differently: AI operates probabilistically, processes queries through semantic understanding, and measures success in citations and brand mentions rather than rankings and click-through rates. That said, SEO and AEO share a foundation, and technical hygiene, page speed, accessibility, and original content that genuinely helps people are important to both.
+SEO optimizes content to rank on a traditional search engine results page. AEO optimizes content to be included in AI-synthesized responses. The underlying mechanics work differently: AI operates probabilistically, processes queries through semantic understanding, and measures success in citations and brand mentions rather than rankings and click-through rates. That said, SEO and AEO are additive. SEO gives you the foundation—technical hygiene, page speed, accessibility, original content that genuinely helps people—and AEO builds on top of it.
 
 **Which search engines use answer engine optimization?**
 
