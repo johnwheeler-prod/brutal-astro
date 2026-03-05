@@ -40,7 +40,7 @@ AI-powered search breaks that contract entirely.
 
 When someone asks ChatGPT or Perplexity a question, the system doesn't return a list of pages — it synthesizes an answer. Your content isn't competing for a ranking slot, it's competing to be incorporated into a response. That's a fundamentally different optimization problem.
 
-The shift matters because the mechanics underneath have changed. AI search processes queries through semantic understanding rather than keyword matching. It builds user embeddings, fans queries out into related variations, maps content against multidimensional vector space, and synthesizes a response informed by all of it. The simple input box hides all of this complexity — a phenomenon I call [answer engine obscurity](/blog/1-answer-engine-obscurity/) — and that hidden complexity is exactly why so many traditional SEO tactics fail here.
+The shift matters because the mechanics underneath have changed. AI search processes queries through semantic understanding rather than keyword matching. The simple input box hides all of this complexity — a phenomenon I call [answer engine obscurity](/blog/1-answer-engine-obscurity/) — and that hidden complexity is exactly why so many traditional SEO tactics fail here.
 
 AEO is the practice of making your content legible to these systems. That means optimizing for how AI understands entities, context, and intent — not just which keywords you've packed into a title tag.
 
@@ -54,9 +54,7 @@ SEO and AEO share a foundation: good content, technical hygiene, and legitimate 
 
 **Success metrics:** SEO success looks like rankings, organic traffic, and click-through rates. AEO success looks like AI citations, brand mentions in generated responses, and AI-sourced traffic showing up in your analytics. Many of these are harder to measure, and the tooling is still catching up.
 
-**Authority signals:** Backlinks still matter for AEO — specifically because RAG (Retrieval Augmented Generation) activates web crawls when AI models lack training consensus on a topic, and those crawls still respect domain authority. But semantic authority — being a recognized, trusted entity on a topic across many contexts — matters more than link equity alone.
-
-For a more detailed breakdown of where these two strategies converge and where they split, see [key differences between SEO and AEO](/blog/drafts/7-seo-vs-aeo/).
+**Authority signals:** Backlinks still matter. But semantic authority — being a recognized entity on a topic across multiple contexts — matters more than link equity alone.
 
 ## AEO Implementation Strategies
 
