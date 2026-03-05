@@ -80,7 +80,7 @@ The key word is *pilot*. Don't try to be everywhere at once. Identify one or two
 
 Research how that community actually operates before you engage. What gets upvoted, what gets buried, what language is used, what's considered self-promotional versus genuinely useful. If you're thinking about Reddit, spend real time in the subreddits you're targeting before you post anything. Understand the norms. No heavy-handed marketing. No blatant ads dressed up as advice. Engage with the community and try to actually be helpful.
 
-If you mention your brand by name, it should be because it's immensely relevant to the conversation. Communities can tell the difference, and so can the AI systems trained on those communities.
+If you mention your brand by name, it should be because it's immensely relevant to the conversation. Communities can tell the difference, and you'll get moderated out of the subreddit before AI ever sees your comment or post.
 
 ### Step 3: Measure the right things early
 
