@@ -36,7 +36,7 @@ Answer Engine Optimization (AEO) is the practice of optimizing content specifica
 
 Traditional search was a matching problem. You targeted a keyword, Google matched it to your page, and a list of blue links appeared.
 
-AI-powered search changes how that works. Think of it as replacing something you used to do yourself. The old system gave you 10 blue links, and you'd read, analyze, and distill some kind of learning or answer from those sources. Now that reading and analyzing happens for you, and you just get a synthesized answer. Your content isn't competing for a ranking slot anymore, it's competing to be incorporated into that response.
+AI-powered search changes how that works. Think of it as replacing something you used to do yourself. The old system gave you 10 blue links, and you'd read, analyze, and distill some kind of learning or answer from those sources. Now that reading and analyzing happens for you, and you just get a synthesized answer. As a writer, you want to shift thinking about ranking for a keyword into becoming an authority on a topic. This helps bridge the gap between keywords and prompts. Keywords are rigid, prompts end up softer and fuzzier around the edges.
 
 The mechanics underneath have shifted too. AI search processes queries through semantic understanding rather than keyword matching. The simple input box hides all of this complexity (a phenomenon I call [answer engine obscurity](/blog/1-answer-engine-obscurity/)), and that hidden complexity is exactly why so many traditional SEO tactics don't translate here.
 
