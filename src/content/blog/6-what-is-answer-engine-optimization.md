@@ -104,7 +104,7 @@ Here's what I actually track:
 
 **CRM source attribution.** Traffic numbers mean more when they convert. The more useful signal is whether new contacts in your CRM are coming from AI platforms. This requires clean UTM discipline and a CRM that respects source attribution, but it's worth building early.
 
-**Direct brand queries.** Test the AI platforms yourself. Search for your brand, your core offering, your competitors. Note what they say. Do this consistently so you can track changes over time. This is manual work, but right now it's the best way to understand your brand's standing in AI-generated responses.
+**Brand sentiment.** A few free tools make this easier than starting from scratch. [HubSpot's AEO Grader](https://www.hubspot.com/aeo-grader), [Webflow's AEO Maturity Model](https://webflow.com/solutions/aeo), and [Profound's free AEO audit](https://www.tryprofound.com/aeo-report) all give you a structured starting point for understanding how AI platforms currently see your brand. Beyond those, query the platforms directly—search for your brand, your core offering, your competitors—and note what they say. Do this consistently so you can track shifts over time. It's manual work, but right now it's the most reliable way to understand where you actually stand.
 
 **Prompt volume (eventually).** As tooling develops, you'll be able to track how often your brand appears across AI responses in your category. This is a lagging indicator (it moves slowly and requires consistent content investment), but it's ultimately the most meaningful AEO metric. Build toward it, but don't let its absence stop you from starting.
 
