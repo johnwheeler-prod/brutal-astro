@@ -108,15 +108,9 @@ Here's what I actually track:
 
 **Prompt volume (eventually).** As tooling develops, you'll be able to track how often your brand appears across AI responses in your category. This is a lagging indicator (it moves slowly and requires consistent content investment), but it's ultimately the most meaningful AEO metric. Build toward it, but don't let its absence stop you from starting.
 
-## Frequently Asked Questions
+## Some closing advice that isn't exactly AEO related
 
-**How does AEO differ from SEO?**
-
-SEO optimizes content to rank on a traditional search engine results page. AEO optimizes content to be included in AI-synthesized responses. The underlying mechanics work differently: AI operates probabilistically, processes queries through semantic understanding, and measures success in citations and brand mentions rather than rankings and click-through rates. That said, SEO and AEO are additive. SEO gives you the foundation—technical hygiene, page speed, accessibility, original content that genuinely helps people—and AEO builds on top of it.
-
-**Which search engines use answer engine optimization?**
-
-AEO is most relevant for AI-first platforms: ChatGPT Search, Perplexity, Google's AI Overviews (powered by Gemini), and Microsoft Copilot. Each extracts and presents content a little differently, but the core optimization principles apply across all of them (semantic clarity, entity authority, and content that functions as credible source material for natural language synthesis).
+There is massive value in starting to do something. You will always be inexperienced when you work on something new. What is important to realize now is that doing something in the next six weeks is usually better than doing the "right" or "perfect" thing (whatever that means) in six months.
 
 ---
 
