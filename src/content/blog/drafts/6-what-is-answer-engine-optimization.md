@@ -117,3 +117,7 @@ SEO optimizes content to rank on a traditional search engine results page. AEO o
 **Which search engines use answer engine optimization?**
 
 AEO is most relevant for AI-first platforms: ChatGPT Search, Perplexity, Google's AI Overviews (powered by Gemini), and Microsoft Copilot. Each extracts and presents content a little differently, but the core optimization principles apply across all of them (semantic clarity, entity authority, and content that functions as credible source material for natural language synthesis).
+
+---
+
+*note: in an effort to be transparent, this blog post was written in a relatively non-traditional way. it was done fully via mobile phone (which honestly feels pretty cool). in a claude code session connected to my portfolio, I had claude interview me based on a draft outline I already had. the interview was then structured into a first pass, and then refined a few times. I've done my best to ensure accuracy, but in some ways this is an experiment. if you find inaccuracies, or have thoughts on this process, feel free to drop me a line on linkedin*
