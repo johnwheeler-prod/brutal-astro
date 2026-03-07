@@ -2,7 +2,6 @@
 import BaseNavigation from '@components/layout/BaseNavigation.astro';
 import BaseFooter from '@components/layout/BaseFooter.astro';
 import BaseHead from '../components/layout/BaseHead.astro';
-import '../styles/global.css';
 
 interface Props {
   title: string;
@@ -37,5 +36,16 @@ const pageTitle = Astro.props.pageTitle ?? `John Wheeler | ${title}`;
     <BaseNavigation {pageTitle} />
     <slot />
     <BaseFooter />
+    
+    <!-- Load global CSS after initial render -->
+    <script is:inline>
+      // Ensure global styles are loaded for non-critical elements
+      if (!document.querySelector('link[href="/styles/global.css"]')) {
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = '/styles/global.css';
+        document.head.appendChild(link);
+      }
+    </script>
   </body>
 </html>
