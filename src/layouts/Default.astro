@@ -19,14 +19,15 @@ interface Props {
   isTagPage?: boolean;
   tagName?: string;
   articleBody?: string;
+  faqSchema?: Record<string, any> | null;
 }
 
-const { title, description, classList, ogImage, ogType, pageSchema, breadcrumbs, customTitle, isHomepage = false, isBlogIndex = false, blogPosts = [], isTagPage = false, tagName, articleBody } = Astro.props;
+const { title, description, classList, ogImage, ogType, pageSchema, breadcrumbs, customTitle, isHomepage = false, isBlogIndex = false, blogPosts = [], isTagPage = false, tagName, articleBody, faqSchema } = Astro.props;
 const pageTitle = Astro.props.pageTitle ?? `John Wheeler | ${title}`;
 ---
 
 <html lang='en' class='h-full'>
-  <BaseHead ogImage={ogImage} ogType={ogType} title={title} description={description} pageSchema={pageSchema} breadcrumbs={breadcrumbs} customTitle={customTitle} isHomepage={isHomepage} isBlogIndex={isBlogIndex} blogPosts={blogPosts} isTagPage={isTagPage} tagName={tagName} articleBody={articleBody}/>
+  <BaseHead ogImage={ogImage} ogType={ogType} title={title} description={description} pageSchema={pageSchema} breadcrumbs={breadcrumbs} customTitle={customTitle} isHomepage={isHomepage} isBlogIndex={isBlogIndex} blogPosts={blogPosts} isTagPage={isTagPage} tagName={tagName} articleBody={articleBody} faqSchema={faqSchema}/>
 
   <body class:list={[classList]}>
     <!-- Google Tag Manager (noscript) -->

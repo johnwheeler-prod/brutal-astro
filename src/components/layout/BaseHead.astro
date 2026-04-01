@@ -8,7 +8,7 @@ interface Props {
   ogType?: string;
   pageSchema?: Record<string, any>;
   breadcrumbs?: Array<{name: string, url: string}>;
-  faqSchema?: Record<string, any>;
+  faqSchema?: Record<string, any> | null;
   collectionSchema?: Record<string, any>;
   isHomepage?: boolean;
   customTitle?: string;
@@ -25,14 +25,15 @@ if (Astro.props.ogImage === undefined) {
   Astro.props.ogImage = new URL('/v1/generate/og/default.png', Astro.url);
 }
 
-const { title, description, ogImage, ogType = 'website', pageSchema, breadcrumbs, faqSchema, collectionSchema, isHomepage = false, customTitle, isBlogIndex = false, blogPosts = [], isTagPage = false, tagName, articleBody } = Astro.props;
+const { title, description, ogImage, ogType = 'website', pageSchema, breadcrumbs, faqSchema, collectionSchema, isHomepage = false, isBlogIndex = false, blogPosts = [], isTagPage = false, tagName } = Astro.props;
 
 const personSchema = {
   "@context": "https://schema.org",
   "@type": "Person",
   "name": "John Wheeler",
   "url": "https://www.johnwheelerproduction.com/",
-  "jobTitle": "Software and Web Engineer",
+  "jobTitle": "Web Developer & SEO/AEO Specialist",
+  "knowsAbout": ["SEO", "AEO", "Web Development"],
   "sameAs": [
     "https://www.linkedin.com/in/john-wheeler-5697431b9/",
     "https://github.com/johnwheeler"
@@ -45,8 +46,8 @@ const enhancedPersonSchema = isHomepage ? {
   "@type": "Person",
   "name": "John Wheeler",
   "url": "https://www.johnwheelerproduction.com/",
-  "jobTitle": "Software and Web Engineer",
-  "knowsAbout": ["Web Development", "SEO", "Software Engineering", "JavaScript", "React", "Node.js"],
+  "jobTitle": "Web Developer & SEO/AEO Specialist",
+  "knowsAbout": ["SEO", "AEO", "Web Development", "JavaScript", "React", "Node.js"],
   "offers": {
     "@type": "Service",
     "serviceType": "Web Development and SEO Services",
@@ -172,7 +173,7 @@ if (collectionSchema) allSchemas.push(collectionSchema);
   </style>
   
   <!-- Defer non-critical CSS -->
-  <link rel="preload" href="/styles/global.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="/styles/global.css" as="style">
   <noscript><link rel="stylesheet" href="/styles/global.css"></noscript>
   
   <!-- Google Tag Manager (deferred further) -->
