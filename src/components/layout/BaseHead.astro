@@ -178,23 +178,34 @@ if (collectionSchema) allSchemas.push(collectionSchema);
   
   <!-- Google Tag Manager (deferred further) -->
   <script is:inline>
-    window.dataLayer = window.dataLayer || [];
-    window.dataLayer.push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+    try {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
 
-    const loadGTM = () => {
-      if (document.getElementById('gtm-script')) return;
-      const gtmScript = document.createElement('script');
-      gtmScript.id = 'gtm-script';
-      gtmScript.async = true;
-      gtmScript.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-5DFDJZF8';
-      document.head.appendChild(gtmScript);
-    };
+      const loadGTM = () => {
+        try {
+          if (document.getElementById('gtm-script')) return;
+          const gtmScript = document.createElement('script');
+          gtmScript.id = 'gtm-script';
+          gtmScript.async = true;
+          gtmScript.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-5DFDJZF8';
+          gtmScript.onerror = function() {
+            console.warn('Failed to load Google Tag Manager');
+          };
+          document.head.appendChild(gtmScript);
+        } catch (error) {
+          console.warn('Error loading GTM:', error);
+        }
+      };
 
-    // Delay GTM loading until after critical rendering
-    if ('requestIdleCallback' in window) {
-      requestIdleCallback(loadGTM, { timeout: 3000 });
-    } else {
-      window.addEventListener('load', () => setTimeout(loadGTM, 2000), { once: true });
+      // Delay GTM loading until after critical rendering
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(loadGTM, { timeout: 3000 });
+      } else {
+        window.addEventListener('load', () => setTimeout(loadGTM, 2000), { once: true });
+      }
+    } catch (error) {
+      console.warn('Error initializing GTM:', error);
     }
   </script>
   <!-- End Google Tag Manager -->
