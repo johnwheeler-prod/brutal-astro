@@ -1,23 +1,12 @@
 ---
-interface Props {
-  pageTitle: string;
-}
-
-const { pageTitle } = Astro.props;
 ---
 
-<header class='nav-header bg-white border-b-4 border-black'>
-  <nav class='container mx-auto px-4 py-4'>
-    <div class='flex justify-between items-center'>
-      <a href='/' class='text-2xl font-bold text-black hover:text-gray-700 transition-colors'>
-        John Wheeler
-      </a>
-      <div class='flex space-x-6'>
-        <a href='/' class='text-black hover:text-gray-700 transition-colors'>Home</a>
-        <a href='/blog/' class='text-black hover:text-gray-700 transition-colors'>Blog</a>
-        <a href='/contact/' class='text-black hover:text-gray-700 transition-colors'>Contact</a>
-      </div>
+<header class='bg-white border-b-4 border-black'>
+  <nav class='container mx-auto px-4 py-4 flex justify-between items-center'>
+    <a href='/' class='text-2xl font-bold'>John Wheeler</a>
+    <div class='flex gap-6'>
+      <a href='/' class='font-bold hover:underline'>Home</a>
+      <a href='/blog/' class='font-bold hover:underline'>Blog</a>
     </div>
-    <h2 class='text-xl mt-2 text-gray-700'>{pageTitle}</h2>
   </nav>
 </header>
