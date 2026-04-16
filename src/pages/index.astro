@@ -6,6 +6,7 @@ import SpotifyPlayer from '@components/generic/SpotifyPlayer.astro';
 import { Pill } from '@eliancodes/brutal-ui';
 import { Button } from '@eliancodes/brutal-ui';
 import { Card } from '@eliancodes/brutal-ui';
+import HubspotFormCard from '@components/home/HubspotFormCard.astro';
 
 const builtWith = [
   { name: 'GEO AEO', url: 'https://www.seo.com/ai/answer-engine-optimization/' },
@@ -96,7 +97,10 @@ const builtWith = [
         <Card>
           <SpotifyPlayer />
         </Card>
-      </div>    
+      </div>
+      <div class='col-span-4'>
+        <HubspotFormCard />
+      </div>
     </section>
   </main>
 </Layout>
