@@ -46,6 +46,8 @@ The following routes exist in `src/pages/`. **Only link to routes on this list.*
 
 **There is no `/contact/`, `/about/`, `/work/`, or `/services/` page.**
 
+**Keeping this list current:** If a new page is added to `src/pages/` or an existing page is removed, update the table above to match.
+
 ---
 
 ## Layout & Component Conventions
