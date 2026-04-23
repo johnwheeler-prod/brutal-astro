@@ -16,14 +16,16 @@
 
   <div class="spotify-content">
     <div class="current-album mb-6">
-      <iframe
-        id="spotify-frame"
-        width="100%"
-        height="352"
-        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-        title="Spotify album player"
-        style="border: 0; border-radius:12px;"
-      ></iframe>
+      <div class="iframe-wrap">
+        <iframe
+          id="spotify-frame"
+          width="100%"
+          height="352"
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+          title="Spotify album player"
+          style="border: 0; border-radius: 12px; display: block;"
+        ></iframe>
+      </div>
       <div id="spotify-spinner" class="spotify-spinner" aria-label="Loading Spotify player" role="status">
         <div class="spinner-ring"></div>
       </div>
@@ -118,44 +120,47 @@
   }
 
   .spotify-arrow {
-    background: none;
+    background: #fff;
     border: 2px solid #000;
-    border-radius: 0.25rem;
-    width: 2rem;
-    height: 2rem;
+    border-radius: 0;
+    width: 2.25rem;
+    height: 2.25rem;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 1rem;
+    font-weight: 700;
     cursor: pointer;
     flex-shrink: 0;
-    transition: background 0.1s ease, color 0.1s ease;
+    box-shadow: 3px 3px 0 #000;
   }
 
   .spotify-arrow:hover {
     background: #000;
     color: #fff;
+    box-shadow: 1px 1px 0 #000;
   }
 
   .spotify-progress-wrap {
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 0.3rem;
+    gap: 0.4rem;
   }
 
   .spotify-count {
     font-family: 'Poppins', sans-serif;
     font-size: 0.75rem;
+    font-weight: 700;
     color: #000;
-    opacity: 0.5;
+    letter-spacing: 0.05em;
   }
 
   .progress-track {
     width: 100%;
-    height: 3px;
-    background: rgba(0, 0, 0, 0.12);
-    border-radius: 999px;
+    height: 4px;
+    background: rgba(0, 0, 0, 0.35);
+    border-radius: 0;
     overflow: hidden;
   }
 
@@ -163,7 +168,7 @@
     height: 100%;
     width: 0%;
     background: #000;
-    border-radius: 999px;
+    border-radius: 0;
   }
 
   .spotify-content {
@@ -172,6 +177,13 @@
 
   .current-album {
     position: relative;
+  }
+
+  .iframe-wrap {
+    border-radius: 14px;
+    border: 2px solid #000;
+    box-shadow: 6px 6px 0 #000;
+    overflow: hidden;
   }
 
   .spotify-spinner {

@@ -1,128 +1,207 @@
 ---
 import { Card } from '@eliancodes/brutal-ui';
 
-const portalId = import.meta.env.PUBLIC_HUBSPOT_PORTAL_ID || 'YOUR_PORTAL_ID';
-const formId = import.meta.env.PUBLIC_HUBSPOT_FORM_ID || 'YOUR_FORM_ID';
-const region = import.meta.env.PUBLIC_HUBSPOT_REGION || 'na1';
-const isConfigured = portalId !== 'YOUR_PORTAL_ID' && formId !== 'YOUR_FORM_ID';
+const portalId = import.meta.env.PUBLIC_HUBSPOT_PORTAL_ID || '';
+const formId = import.meta.env.PUBLIC_HUBSPOT_FORM_ID || '';
+const isConfigured = !!portalId && !!formId;
 ---
 
 <Card>
   <div class="flex flex-col gap-3">
-    <h2 class="text-2xl md:text-4xl lg:text-6xl dm-serif">Let’s work together</h2>
-    <p class="poppins text-base text-slate-700">
-      Drop your details and I’ll get back to you. Form is powered by HubSpot.
+    <h2 class="text-2xl md:text-4xl lg:text-6xl dm-serif">Let's work together</h2>
+    <p class="poppins text-base">
+      Drop your details and I'll get back to you.
     </p>
-    <div
-      id="hubspot-form"
-      class="hs-form-shell"
-      data-portal={portalId}
-      data-form={formId}
-      data-region={region}
-      aria-live="polite"
-      aria-busy={isConfigured ? 'true' : 'false'}
-    >
-      {isConfigured
-        ? ''
-        : 'Add PUBLIC_HUBSPOT_PORTAL_ID and PUBLIC_HUBSPOT_FORM_ID to enable the form.'}
+
+    {isConfigured ? (
+      <form id="contact-form" novalidate data-portal={portalId} data-form={formId}>
+        <div class="name-row">
+          <div class="field">
+            <label for="firstname">First Name</label>
+            <input type="text" id="firstname" name="firstname" autocomplete="given-name" />
+          </div>
+          <div class="field">
+            <label for="lastname">Last Name</label>
+            <input type="text" id="lastname" name="lastname" autocomplete="family-name" />
+          </div>
+        </div>
+        <div class="field">
+          <label for="email">Email <span class="required">*</span></label>
+          <input type="email" id="email" name="email" autocomplete="email" required />
+        </div>
+        <div class="form-footer">
+          <p id="form-error" class="form-error" aria-live="polite"></p>
+          <button type="submit" class="submit-btn poppins">Submit</button>
+        </div>
+      </form>
+    ) : (
+      <p class="poppins text-sm">Add PUBLIC_HUBSPOT_PORTAL_ID and PUBLIC_HUBSPOT_FORM_ID to enable the form.</p>
+    )}
+
+    <div id="form-success" class="success-msg" hidden aria-live="polite">
+      <strong>Thanks! I'll be in touch soon.</strong>
     </div>
   </div>
 </Card>
 
 <script>
-  declare global {
-    interface Window {
-      hbspt?: { forms: { create: (opts: Record<string, unknown>) => void } };
+  const form = document.getElementById('contact-form') as HTMLFormElement | null;
+  const successMsg = document.getElementById('form-success') as HTMLElement | null;
+  const errorEl = document.getElementById('form-error') as HTMLElement | null;
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!errorEl) return;
+    errorEl.textContent = '';
+
+    const portalId = form.dataset.portal;
+    const formId = form.dataset.form;
+    const email = (form.elements.namedItem('email') as HTMLInputElement).value.trim();
+
+    if (!email) {
+      errorEl.textContent = 'Email is required.';
+      return;
     }
-  }
 
-  const formShell = document.getElementById('hubspot-form');
-  if (!formShell) {
-    console.warn('HubSpot form container missing');
-  } else {
-    const portal = formShell.dataset.portal;
-    const form = formShell.dataset.form;
-    const region = formShell.dataset.region || 'na1';
-    const ready = portal && form && portal !== 'YOUR_PORTAL_ID' && form !== 'YOUR_FORM_ID';
+    const btn = form.querySelector('.submit-btn') as HTMLButtonElement;
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
 
-    const loadScript = () =>
-      new Promise((resolve, reject) => {
-        if (window.hbspt?.forms?.create) return resolve(true);
-        const existing = document.getElementById('hs-embed-script');
-        if (existing) {
-          existing.addEventListener('load', () => resolve(true), { once: true });
-          existing.addEventListener('error', reject, { once: true });
-          return;
+    const fields = ['firstname', 'lastname', 'email'].map((name) => ({
+      objectTypeId: '0-1',
+      name,
+      value: (form.elements.namedItem(name) as HTMLInputElement)?.value.trim() ?? '',
+    }));
+
+    try {
+      const res = await fetch(
+        `https://api.hsforms.com/submissions/v3/integration/submit/${portalId}/${formId}`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            fields,
+            context: { pageUri: window.location.href, pageName: document.title },
+          }),
         }
-        const script = document.createElement('script');
-        script.id = 'hs-embed-script';
-        script.src = 'https://js.hsforms.net/forms/embed/v2.js';
-        script.async = true;
-        script.onload = () => resolve(true);
-        script.onerror = reject;
-        document.body.appendChild(script);
-      });
+      );
 
-    const renderForm = async () => {
-      if (!ready) return;
-      try {
-        const timeout = new Promise((_, rej) =>
-          setTimeout(() => rej(new Error('HubSpot timed out')), 6000)
-        );
-        formShell.textContent = '';
-        formShell.setAttribute('aria-busy', 'true');
-        await loadScript();
-        await Promise.race([timeout, Promise.resolve()]);
-        if (!window.hbspt?.forms?.create) throw new Error('HubSpot embed not available');
-        window.hbspt.forms.create({
-          region,
-          portalId: portal,
-          formId: form,
-          target: '#hubspot-form',
-        });
-        formShell.setAttribute('aria-busy', 'false');
-      } catch (err) {
-        console.error('HubSpot form failed to load', err);
-        formShell.innerHTML = `
-          <div class="hs-error">
-            Form failed to load. Please refresh or use <a href="mailto:hello@johnwheelerproduction.com">hello@johnwheelerproduction.com</a>.
-          </div>
-        `;
-        formShell.setAttribute('aria-busy', 'false');
-      }
-    };
+      if (!res.ok) throw new Error(`Status ${res.status}`);
 
-    const start = () => {
-      if (!ready) return;
-      renderForm();
-    };
-
-    if (document.readyState === 'complete' || document.readyState === 'interactive') {
-      start();
-    } else {
-      document.addEventListener('DOMContentLoaded', start, { once: true });
+      form.hidden = true;
+      if (successMsg) successMsg.hidden = false;
+    } catch {
+      errorEl.textContent = 'Something went wrong. Please try again or email hello@johnwheelerproduction.com';
+      btn.disabled = false;
+      btn.textContent = 'Submit';
     }
-  }
+  });
 </script>
 
 <style>
-  .hs-form-shell {
-    margin-top: 0.5rem;
-    background: transparent;
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
   }
 
-  /* Mild overrides (free tier limits full control) */
-  :global(.hs-form) {
+  .name-row {
     display: grid;
-    gap: 0.75rem;
-    background: transparent !important;
-    padding: 0 !important;
-    border: none !important;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
   }
 
-  :global(.hs-error) {
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  label {
     font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 0.875rem;
+    color: #000;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .required {
     color: #b91c1c;
+  }
+
+  input[type="text"],
+  input[type="email"] {
+    width: 100%;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    color: #000;
+    background: #fff;
+    border: 2px solid #000;
+    border-radius: 0;
+    padding: 0.5rem 0.75rem;
+    outline: none;
+    box-shadow: 4px 4px 0 #000;
+    -webkit-appearance: none;
+    appearance: none;
+    box-sizing: border-box;
+  }
+
+  input[type="text"]:focus,
+  input[type="email"]:focus {
+    box-shadow: 2px 2px 0 #000;
+  }
+
+  .form-footer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .form-error {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.8rem;
     font-weight: 600;
+    color: #b91c1c;
+    flex: 1;
+  }
+
+  .submit-btn {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #fff;
+    background: #000;
+    border: 2px solid #000;
+    border-radius: 0;
+    padding: 0.625rem 1.5rem;
+    cursor: pointer;
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.35);
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  .submit-btn:hover {
+    background: #fff;
+    color: #000;
+    box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.35);
+  }
+
+  .submit-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  .success-msg {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    color: #000;
+    border: 2px solid #000;
+    padding: 1rem;
+    box-shadow: 4px 4px 0 #000;
   }
 </style>
