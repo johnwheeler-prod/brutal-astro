@@ -39,43 +39,50 @@ interface Props {
 const { tag, blogposts } = Astro.props;
 
 // Generate optimized titles and descriptions based on tag
-let title, description, pageTitle;
+let title, description, pageTitle, h1Text;
 
 switch(tag) {
   case 'ai':
     title = 'AI Insights & Analysis | John Wheeler\'s Blog';
     description = 'Explore AI insights on SEO, hiring, and web development. Expert analysis on artificial intelligence trends, tools, and industry impact from John Wheeler.';
     pageTitle = 'AI Insights & Analysis | John Wheeler\'s Blog';
+    h1Text = 'AI Insights & Analysis - Expert Articles on Artificial Intelligence';
     break;
   case 'aeo':
     title = 'Answer Engine Optimization (AEO) Guide | John Wheeler';
     description = 'Comprehensive guide to Answer Engine Optimization (AEO). Learn the differences between SEO and AEO, implementation strategies, and best practices for AI search visibility.';
     pageTitle = 'Answer Engine Optimization (AEO) Guide';
+    h1Text = 'Answer Engine Optimization (AEO) Guide';
     break;
   case 'geo aeo':
     title = 'GEO AEO Guide: Google Experience Optimization & Answer Engine Tips | John Wheeler';
     description = 'Expert insights on Google Experience Optimization (GEO) and Answer Engine Optimization (AEO). Learn how AI search is changing SEO strategy and content optimization.';
     pageTitle = 'GEO AEO: Google Experience & Answer Engine Optimization Guide';
+    h1Text = 'GEO AEO Guide: Google Experience Optimization & Answer Engine Optimization';
     break;
   case 'seo':
     title = 'SEO Tips and Guides | John Wheeler\'s Blog - Search Engine Optimization Resources';
     description = 'Expert SEO guides covering AI search optimization, small business SEO, answer engine optimization (AEO), and Google algorithm insights. Practical tips from an SEO specialist.';
     pageTitle = 'SEO Tips and Optimization Guides';
+    h1Text = 'SEO Tips and Guides - Expert Search Engine Optimization Resources';
     break;
   case 'small business':
     title = 'Small Business Tips & Growth Strategies | John Wheeler';
     description = 'Discover practical small business tips, SEO strategies, and growth advice for entrepreneurs. Expert insights to help your business succeed online and offline.';
     pageTitle = 'Small Business Tips & Growth Strategies';
+    h1Text = 'Small Business Tips & Growth Strategies';
     break;
   case 'web development':
     title = `Web Development Insights & Best Practices | John Wheeler`;
     description = 'Web development insights covering SEO, AI integration, and modern development practices. Expert analysis on technical implementation and digital marketing strategy.';
     pageTitle = 'Web Development Insights & Best Practices';
+    h1Text = 'Web Development Articles & Insights';
     break;
   default:
     title = `Blog: ${tag}`;
     description = `All posts tagged with ${tag}`;
     pageTitle = `Blogposts tagged with ${tag}`;
+    h1Text = `${tag.charAt(0).toUpperCase() + tag.slice(1)} Articles`;
 }
 ---
 
@@ -88,6 +95,7 @@ switch(tag) {
     <div>
       <Button href='/blog/'>&larr; Back to blog</Button>
     </div>
+    <h1 class='text-2xl md:text-4xl lg:text-6xl mb-8 dm-serif'>{h1Text}</h1>
     <BlogList posts={blogposts} />
   </main>
 </Layout>

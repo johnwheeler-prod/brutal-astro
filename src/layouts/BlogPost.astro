@@ -48,6 +48,59 @@ const pageSchema = {
   "articleBody": articleBodyContent
 };
 
+// Generate FAQ schema for specific blog posts with Q&A content
+let faqSchema = null;
+switch(Astro.params.slug) {
+  case '1-answer-engine-obscurity':
+    faqSchema = {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Why doesn't traditional SEO work for AI platforms?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Traditional SEO focuses on ranking in search results, but AI platforms like ChatGPT and Claude don't show ranked lists. They provide direct answers, making traditional ranking-focused strategies ineffective for AI-powered search experiences."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is vector space in AI search?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Vector space in AI search refers to how content is converted into mathematical representations that AI models can understand and compare. Content with similar meanings cluster together in this vector space, allowing AI to find semantically related information rather than just keyword matches."
+          }
+        }
+      ]
+    };
+    break;
+  case '2-seo-for-small-business':
+    faqSchema = {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What are SEO foundations?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "SEO foundations include technical optimization (site speed, mobile-friendliness, proper HTML structure), content optimization (keyword research, quality content creation), and off-page factors (backlinks, local citations). These form the base that all other SEO efforts build upon."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How to do local SEO?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Local SEO involves optimizing your Google Business Profile, ensuring consistent NAP (Name, Address, Phone) information across directories, gathering customer reviews, creating location-specific content, and building local citations. Focus on appearing in local map results and 'near me' searches."
+          }
+        }
+      ]
+    };
+    break;
+}
+
 // Generate optimized titles for specific blog posts
 let customTitle;
 switch(Astro.params.slug) {
@@ -71,6 +124,7 @@ switch(Astro.params.slug) {
   breadcrumbs={breadcrumbs}
   customTitle={customTitle}
   articleBody={articleBodyContent}
+  faqSchema={faqSchema}
 >
   <main class='p-6 lg:grid lg:grid-cols-3 flex justify-center'>
     <BlogSideBar headings={headings} />
