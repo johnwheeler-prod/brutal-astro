@@ -40,20 +40,25 @@ const pageTitle = Astro.props.pageTitle ?? `John Wheeler | ${title}`;
     
     <!-- Load global CSS after initial render -->
     <script is:inline>
-      try {
-        // Ensure global styles are loaded for non-critical elements
-        if (!document.querySelector('link[href="/styles/global.css"]')) {
-          const link = document.createElement('link');
-          link.rel = 'stylesheet';
-          link.href = '/styles/global.css';
-          link.onerror = function() {
-            console.warn('Failed to load global CSS');
-          };
-          document.head.appendChild(link);
+      (function() {
+        try {
+          // Ensure global styles are loaded for non-critical elements
+          if (!document.querySelector('link[href="/styles/global.css"]')) {
+            const link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = '/styles/global.css';
+            link.onerror = function(e) {
+              // Silently handle CSS loading errors
+            };
+            link.onload = function() {
+              // CSS loaded successfully
+            };
+            document.head.appendChild(link);
+          }
+        } catch (error) {
+          // Silently handle any CSS loading errors
         }
-      } catch (error) {
-        console.warn('Error loading global CSS:', error);
-      }
+      })();
     </script>
   </body>
 </html>
