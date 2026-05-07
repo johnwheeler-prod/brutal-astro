@@ -178,40 +178,71 @@ if (collectionSchema) allSchemas.push(collectionSchema);
   
   <!-- Google Tag Manager (deferred further) -->
   <script is:inline>
-    try {
-      window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+    (function() {
+      try {
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
 
-      const loadGTM = () => {
-        try {
-          if (document.getElementById('gtm-script')) return;
-          const gtmScript = document.createElement('script');
-          gtmScript.id = 'gtm-script';
-          gtmScript.async = true;
-          gtmScript.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-5DFDJZF8';
-          gtmScript.onerror = function() {
-            console.warn('Failed to load Google Tag Manager');
-          };
-          document.head.appendChild(gtmScript);
-        } catch (error) {
-          console.warn('Error loading GTM:', error);
+        const loadGTM = function() {
+          try {
+            if (document.getElementById('gtm-script')) return;
+            const gtmScript = document.createElement('script');
+            gtmScript.id = 'gtm-script';
+            gtmScript.async = true;
+            gtmScript.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-5DFDJZF8';
+            gtmScript.onerror = function(e) {
+              // Silently handle GTM loading errors to prevent console noise
+            };
+            gtmScript.onload = function() {
+              // GTM loaded successfully
+            };
+            document.head.appendChild(gtmScript);
+          } catch (error) {
+            // Silently handle GTM initialization errors
+          }
+        };
+
+        // Delay GTM loading until after critical rendering
+        if ('requestIdleCallback' in window) {
+          requestIdleCallback(loadGTM, { timeout: 3000 });
+        } else {
+          if (document.readyState === 'loading') {
+            window.addEventListener('load', function() {
+              setTimeout(loadGTM, 2000);
+            }, { once: true });
+          } else {
+            setTimeout(loadGTM, 2000);
+          }
         }
-      };
-
-      // Delay GTM loading until after critical rendering
-      if ('requestIdleCallback' in window) {
-        requestIdleCallback(loadGTM, { timeout: 3000 });
-      } else {
-        window.addEventListener('load', () => setTimeout(loadGTM, 2000), { once: true });
+      } catch (error) {
+        // Silently handle any initialization errors
       }
-    } catch (error) {
-      console.warn('Error initializing GTM:', error);
-    }
+    })();
   </script>
   <!-- End Google Tag Manager -->
 
   <!-- HubSpot Tracking -->
-  <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/51012416.js"></script>
+  <script is:inline>
+    (function() {
+      try {
+        const hubspotScript = document.createElement('script');
+        hubspotScript.type = 'text/javascript';
+        hubspotScript.id = 'hs-script-loader';
+        hubspotScript.async = true;
+        hubspotScript.defer = true;
+        hubspotScript.src = '//js.hs-scripts.com/51012416.js';
+        hubspotScript.onerror = function(e) {
+          // Silently handle HubSpot loading errors
+        };
+        hubspotScript.onload = function() {
+          // HubSpot loaded successfully
+        };
+        document.head.appendChild(hubspotScript);
+      } catch (error) {
+        // Silently handle HubSpot initialization errors
+      }
+    })();
+  </script>
   <!-- End HubSpot Tracking -->
 
   <link
